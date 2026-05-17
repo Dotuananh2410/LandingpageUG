@@ -400,7 +400,7 @@
             errorMsg.classList.add('hidden');
             
             // Loading state
-            const originalBtnText = submitBtn.innerHTML;
+            const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'ĐANG GỬI...';
             submitBtn.disabled = true;
 
@@ -425,7 +425,7 @@
                 errorMsg.textContent = 'Có lỗi xảy ra: ' + error.message;
                 errorMsg.classList.remove('hidden');
             } finally {
-                submitBtn.innerHTML = originalBtnText;
+                submitBtn.textContent = originalBtnText;
                 submitBtn.disabled = false;
             }
         });
