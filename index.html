@@ -678,348 +678,269 @@
     <!-- Gamification -->
  
 
-<section  class="py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50">
-    <!-- BACKGROUND GLOW -->
-<div class="absolute top-[-120px] right-[-120px] w-[320px] h-[320px] bg-blue-300/30 rounded-full blur-3xl"></div>
+<!-- SECTION: GAMIFIED EXPERIENCE (PREMIUM VERSION) -->
+<section class="py-24 bg-[#0f172a] relative overflow-hidden text-white">
+    <!-- Hiệu ứng nền Blur nghệ thuật -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
 
-<div class="absolute bottom-[-120px] left-[-120px] w-[300px] h-[300px] bg-cyan-300/30 rounded-full blur-3xl"></div>
-
-<div class="absolute inset-0 opacity-[0.03]"
-     style="background-image: radial-gradient(#1e40af 1px, transparent 1px);
-            background-size: 28px 28px;">
-</div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        <!-- TITLE -->
+        <!-- Tiêu đề Section -->
         <div class="text-center mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-5">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                Học mà chơi - tiến bộ thật
-            </div>
-
-            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-5">
-                Một Buổi Học Tại UpGrid
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
+                Trải Nghiệm Học Tập <span class="text-blue-400">Thế Hệ Mới</span>
             </h2>
-
-            <p class="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed">
-                Chúng tôi biến lớp học thành nơi học sinh muốn bước vào mỗi ngày —
-                có động lực cố gắng, được ghi nhận tiến bộ và luôn cảm thấy “mình làm được”.
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                UpGrid biến những con số khô khan thành hành trình chinh phục đầy cảm hứng, nơi mỗi nỗ lực nhỏ nhất của học sinh đều được ghi nhận và vinh danh.
             </p>
         </div>
 
-        <div class="space-y-10">
-
-            <!-- WARMUP -->
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div class="experience-title">
-                        <i data-lucide="zap" class="w-8 h-8 text-yellow-500"></i>
-                        Warm-up Phản Xạ
-                    </div>
-
-                    <p class="experience-sub">
-                        Mini game đầu giờ giúp học sinh ôn lại kiến thức cũ một cách tự nhiên,
-                        giảm áp lực hỏi bài và giúp não bộ “khởi động” trước khi học kiến thức mới.
-                    </p>
+        <!-- 3 Cột trụ tương tác (Tabs) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Tab 1 -->
+            <button onclick="switchEduTab('warmup')" id="btn-warmup" 
+                class="edu-tab-btn active group relative p-8 rounded-[2rem] bg-white/5 border border-white/10 text-left transition-all duration-300 hover:bg-white/10">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="zap" class="text-blue-400 w-6 h-6"></i>
                 </div>
+                <h3 class="text-xl font-bold mb-2">Warm-up Phản Xạ</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Đánh thức tư duy bằng các mini-game logic trước mỗi buổi học.</p>
+                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-500 rounded-t-full opacity-0 transition-opacity"></div>
+            </button>
 
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-                    <!-- GAME -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-
-                            <div class="game-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="game-overlay"></div>
-
-                                <div class="game-title">
-                                    <h4>Truy Kích Công Thức</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-
-                            <div class="game-back">
-                                <h4>Truy Kích Công Thức</h4>
-                                <p>
-                                    Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng.
-                                    Ai phản xạ nhanh và chính xác sẽ ghi điểm cho đội.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- GAME -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-
-                            <div class="game-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="game-overlay"></div>
-
-                                <div class="game-title">
-                                    <h4>Giải Mã Sai Lầm</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-
-                            <div class="game-back">
-                                <h4>Giải Mã Sai Lầm</h4>
-                                <p>
-                                    Mentor đưa ra một lời giải sai. Nhiệm vụ của học sinh là tìm
-                                    lỗi sai nhanh nhất và sửa lại chính xác.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- GAME -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-
-                            <div class="game-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="game-overlay"></div>
-
-                                <div class="game-title">
-                                    <h4>Đua Não 30s</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-
-                            <div class="game-back">
-                                <h4>Đua Não 30s</h4>
-                                <p>
-                                    Trong 30 giây, học sinh giải liên tiếp các câu hỏi phản xạ nhanh.
-                                    Càng đúng nhiều càng nhận combo XP lớn.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- GAME -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-
-                            <div class="game-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="game-overlay"></div>
-
-                                <div class="game-title">
-                                    <h4>Săn Boss Toán Học</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-
-                            <div class="game-back">
-                                <h4>Săn Boss Toán Học</h4>
-                                <p>
-                                    Cả lớp cùng teamwork giải một bài toán “boss”.
-                                    Mỗi bước giải đúng sẽ mở khóa thêm gợi ý tiếp theo.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
+            <!-- Tab 2 -->
+            <button onclick="switchEduTab('xp')" id="btn-xp" 
+                class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white/5 border border-white/10 text-left transition-all duration-300 hover:bg-white/10">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="gem" class="text-purple-400 w-6 h-6"></i>
                 </div>
-            </div>
+                <h3 class="text-xl font-bold mb-2">Hệ Thống Tích XP</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Tích lũy điểm kinh nghiệm từ sự nỗ lực để đổi những phần quà độc bản.</p>
+                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-purple-500 rounded-t-full opacity-0 transition-opacity"></div>
+            </button>
 
-            <!-- REWARD SHOP -->
-            <div class="experience-card">
-
-                <div class="experience-header">
-                    <div class="experience-title">
-                        <i data-lucide="gift" class="w-8 h-8 text-pink-500"></i>
-                        Tích Điểm Nhận Quà
-                    </div>
-
-                    <p class="experience-sub">
-                        Mỗi lần phát biểu, giải đúng, hỗ trợ bạn bè hay hoàn thành thử thách
-                        đều được cộng XP ngay tại lớp.
-                    </p>
+            <!-- Tab 3 -->
+            <button onclick="switchEduTab('rank')" id="btn-rank" 
+                class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white/5 border border-white/10 text-left transition-all duration-300 hover:bg-white/10">
+                <div class="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="trophy" class="text-orange-400 w-6 h-6"></i>
                 </div>
+                <h3 class="text-xl font-bold mb-2">Bảng Vàng Vinh Danh</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Ghi nhận sự kiên trì và tinh thần hỗ trợ đồng đội thay vì chỉ điểm số.</p>
+                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-orange-500 rounded-t-full opacity-0 transition-opacity"></div>
+            </button>
+        </div>
 
-                <div class="px-6 pb-8">
-                    <div class="reward-scroll">
-                        <div class="reward-row">
-
-                            <div class="reward-card">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="reward-body">
-                                    <div class="reward-name">Blind Box Toán Học</div>
-                                    <div class="reward-xp">
-                                        <i data-lucide="star" class="w-4 h-4"></i>
-                                        150 XP
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reward-card">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="reward-body">
-                                    <div class="reward-name">Thẻ Miễn Bài Tập</div>
-                                    <div class="reward-xp">
-                                        <i data-lucide="star" class="w-4 h-4"></i>
-                                        220 XP
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reward-card">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="reward-body">
-                                    <div class="reward-name">Bút Chiến Thần</div>
-                                    <div class="reward-xp">
-                                        <i data-lucide="star" class="w-4 h-4"></i>
-                                        300 XP
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reward-card">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="reward-body">
-                                    <div class="reward-name">Combo Snack Học Bá</div>
-                                    <div class="reward-xp">
-                                        <i data-lucide="star" class="w-4 h-4"></i>
-                                        450 XP
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reward-card">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="reward-body">
-                                    <div class="reward-name">Áo Limited UpGrid</div>
-                                    <div class="reward-xp">
-                                        <i data-lucide="star" class="w-4 h-4"></i>
-                                        1200 XP
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ACHIEVEMENT -->
-            <div class="experience-card">
-
-                <div class="experience-header">
-                    <div class="experience-title">
-                        <i data-lucide="trophy" class="w-8 h-8 text-orange-500"></i>
-                        Bảng Vàng Thành Tích
-                    </div>
-
-                    <p class="experience-sub">
-                        Không chỉ tôn vinh điểm số — UpGrid ghi nhận cả sự cố gắng,
-                        tính sáng tạo và tinh thần hỗ trợ bạn bè.
-                    </p>
-                </div>
-
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-                    <!-- ACHIEVEMENT -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-
-                            <div class="achievement-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="achievement-label">
-                                    <h4>Chiến Thần Kỷ Luật</h4>
-                                </div>
-                            </div>
-
-                            <div class="achievement-back">
-                                <h4>Chiến Thần Kỷ Luật</h4>
-                                <p>
-                                    Dành cho học sinh giữ chuỗi hoàn thành bài tập dài nhất.
-                                    Giúp các con xây tính kỷ luật và sự bền bỉ trong học tập.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ACHIEVEMENT -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-
-                            <div class="achievement-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="achievement-label">
-                                    <h4>Nhà Phát Minh Công Thức</h4>
-                                </div>
-                            </div>
-
-                            <div class="achievement-back">
-                                <h4>Nhà Phát Minh Công Thức</h4>
-                                <p>
-                                    Dành cho học sinh nghĩ ra cách giải mới hoặc lời giải sáng tạo.
-                                    Khuyến khích tư duy độc lập thay vì học thuộc máy móc.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ACHIEVEMENT -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-
-                            <div class="achievement-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="achievement-label">
-                                    <h4>Mentor Nhí</h4>
-                                </div>
-                            </div>
-
-                            <div class="achievement-back">
-                                <h4>Mentor Nhí</h4>
-                                <p>
-                                    Dành cho học sinh thường xuyên hỗ trợ giảng bài cho bạn bè.
-                                    Rèn kỹ năng giao tiếp và khả năng giải thích logic.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- ACHIEVEMENT -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-
-                            <div class="achievement-front">
-                                <img src="YOUR_IMAGE_HERE" alt="">
-                                <div class="achievement-label">
-                                    <h4>Vua Phản Xạ</h4>
-                                </div>
-                            </div>
-
-                            <div class="achievement-back">
-                                <h4>Vua Phản Xạ</h4>
-                                <p>
-                                    Dành cho học sinh có tốc độ xử lý nhanh nhất trong các mini game.
-                                    Giúp tăng sự tự tin và khả năng tư duy tốc độ cao.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
+        <!-- Panel chi tiết động -->
+        <div id="edu-content-panel" class="relative min-h-[450px] bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500">
+            <!-- Nội dung sẽ được Inject qua JS -->
         </div>
     </div>
 </section>
+
+<style>
+    /* CSS hỗ trợ cho Section mới */
+    .edu-tab-btn.active {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .edu-tab-btn.active .active-indicator {
+        opacity: 1;
+    }
+    .fade-in-up {
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    const eduData = {
+        warmup: `
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 lg:p-12 fade-in-up">
+                <div>
+                    <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-blue-500 text-xs flex items-center justify-center">01</span>
+                        Khởi động tư duy (Warm-up)
+                    </h4>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                <i data-lucide="target" class="w-5 h-5 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold mb-1">Tia Chớp Toán Học</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">Thử thách 60 giây giải nhanh các phép tính logic cơ bản để kích hoạt phản xạ não bộ trước khi vào bài mới.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                <i data-lucide="search" class="w-5 h-5 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold mb-1">Săn Lỗi Sai (Error Hunter)</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">Học sinh đóng vai "thám tử" tìm ra bước giải sai trong bài toán mẫu của Mentor.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60 shadow-inner" alt="Classroom Activities">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                        <p class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Live Activity</p>
+                        <p class="text-sm">Học sinh đang tham gia "Đấu trường 100" cuối tuần</p>
+                    </div>
+                </div>
+            </div>
+        `,
+        xp: `
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 lg:p-12 fade-in-up">
+                <div>
+                    <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-purple-500 text-xs flex items-center justify-center">02</span>
+                        Hệ thống phần thưởng (XP Store)
+                    </h4>
+                    <p class="text-slate-400 mb-8 leading-relaxed">Tại UpGrid, mỗi câu trả lời đúng, mỗi trang vở sạch hay mỗi lần giúp bạn đều được chuyển đổi thành điểm XP tích lũy.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors">
+                            <i data-lucide="package" class="w-6 h-6 text-purple-400 mb-3"></i>
+                            <p class="font-bold text-sm">Blind Box UpGrid</p>
+                            <p class="text-xs text-slate-500">Đổi bằng 100 XP</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors">
+                            <i data-lucide="coffee" class="w-6 h-6 text-purple-400 mb-3"></i>
+                            <p class="font-bold text-sm">Trà Sữa Học Bá</p>
+                            <p class="text-xs text-slate-500">Đổi bằng 250 XP</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-purple-400 mb-3"></i>
+                            <p class="font-bold text-sm">Thẻ Miễn Bài Tập</p>
+                            <p class="text-xs text-slate-500">Đổi bằng 500 XP</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors">
+                            <i data-lucide="backpack" class="w-6 h-6 text-purple-400 mb-3"></i>
+                            <p class="font-bold text-sm">Balo Limited</p>
+                            <p class="text-xs text-slate-500">Đổi bằng 1200 XP</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <!-- Dashboard Mockup -->
+                    <div class="w-full max-w-sm p-6 rounded-[2rem] bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-white/20 shadow-2xl">
+                         <div class="flex justify-between items-center mb-8">
+                            <div>
+                                <p class="text-xs text-slate-400">Học sinh</p>
+                                <p class="font-bold">Gia Huy - Lớp 9A1</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center font-bold text-sm">GH</div>
+                         </div>
+                         <div class="mb-6">
+                            <div class="flex justify-between text-xs mb-2">
+                                <span class="text-slate-300 italic">Level 12 (Pro Hunter)</span>
+                                <span class="text-purple-400">850/1000 XP</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="w-[85%] h-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                            </div>
+                         </div>
+                         <p class="text-[10px] text-center text-slate-500">Sắp đạt mốc nhận Balo UpGrid!</p>
+                    </div>
+                </div>
+            </div>
+        `,
+        rank: `
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 lg:p-12 fade-in-up">
+                <div>
+                    <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-orange-500 text-xs flex items-center justify-center">03</span>
+                        Hệ Thống Badge & Vinh Danh
+                    </h4>
+                    <p class="text-slate-400 mb-6 leading-relaxed">Chúng tôi không chỉ vinh danh những học sinh giỏi nhất, mà vinh danh cả những bạn có sự bứt phá lớn nhất.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 border border-orange-500/30">
+                                <i data-lucide="flame" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">The Fire Starter</p>
+                                <p class="text-xs text-slate-500 italic">Dành cho bạn luôn hăng hái phát biểu và lan tỏa năng lượng.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 border border-cyan-500/30">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Mini Mentor</p>
+                                <p class="text-xs text-slate-500 italic">Vinh danh tinh thần hỗ trợ bạn học trong nhóm nhỏ.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 border border-green-500/30">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Growth Master</p>
+                                <p class="text-xs text-slate-500 italic">Dành cho học sinh có sự tiến bộ vượt bậc so với đầu kỳ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/5 rounded-3xl p-8 border border-white/10">
+                    <p class="text-sm font-bold mb-6 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-4 h-4 text-orange-400"></i> Top Bứt Phá Tuần 03</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-slate-500">#1</span>
+                                <span class="font-medium">Nguyễn Bảo Ngọc</span>
+                            </div>
+                            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">+450 XP</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-slate-500">#2</span>
+                                <span class="font-medium">Lê Đức Anh</span>
+                            </div>
+                            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">+380 XP</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-slate-500">#3</span>
+                                <span class="font-medium">Trần Khánh Linh</span>
+                            </div>
+                            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">+310 XP</span>
+                        </div>
+                    </div>
+                    <div class="mt-10 pt-6 border-t border-white/10 text-center">
+                        <p class="text-xs text-slate-500">Bảng xếp hạng cập nhật lúc 22:00 Chủ Nhật hàng tuần</p>
+                    </div>
+                </div>
+            </div>
+        `
+    };
+
+    function switchEduTab(tabId) {
+        // Cập nhật trạng thái Button
+        document.querySelectorAll('.edu-tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`btn-${tabId}`).classList.add('active');
+
+        // Thay đổi Content
+        const panel = document.getElementById('edu-content-panel');
+        panel.innerHTML = eduData[tabId];
+
+        // Khởi tạo lại Lucide icons cho content mới
+        lucide.createIcons();
+    }
+
+    // Khởi tạo mặc định
+    document.addEventListener('DOMContentLoaded', () => {
+        switchEduTab('warmup');
+    });
+</script>
     <!-- Registration -->
     <section id="uu-dai" class="py-20 bg-slate-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
