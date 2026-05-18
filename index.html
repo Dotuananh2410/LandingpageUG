@@ -7,17 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- ✅ FIX 1: Chỉ load Supabase CDN 1 lần duy nhất -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- THÊM NGAY ĐÂY -->
-<script>
-  const _supabase = window.supabase.createClient(
-    "https://jpkihfxuzvmqcsidacho.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impwa2loZnh1enZtcWNzaWRhY2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTI4MDYsImV4cCI6MjA5NDU2ODgwNn0.-yBL6TuOyrmlfr1thBXnHjj52xdQ5uSY1QhrcCrk07E"
-  );
-</script>
-    <!-- Supabase Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- ✅ FIX 2: Khởi tạo _supabase ngay sau CDN, tách script riêng -->
+    <script>
+        const _supabase = window.supabase.createClient(
+            "https://jpkihfxuzvmqcsidacho.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impwa2loZnh1enZtcWNzaWRhY2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTI4MDYsImV4cCI6MjA5NDU2ODgwNn0.-yBL6TuOyrmlfr1thBXnHjj52xdQ5uSY1QhrcCrk07E"
+        );
+    </script>
+
     <style>
         body { font-family: 'Be Vietnam Pro', sans-serif; scroll-behavior: smooth; }
         .gradient-text { background: linear-gradient(90deg, #1e3a8a 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -50,7 +51,6 @@
             overflow: hidden;
             position: relative;
             padding: 0.5rem 0 1rem;
-            /* fade edges */
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
         }
@@ -60,426 +60,90 @@
             width: max-content;
             animation: mentor-scroll 32s linear infinite;
         }
-        .carousel-outer:hover .carousel-track {
-            animation-play-state: paused;
-        }
+        .carousel-outer:hover .carousel-track { animation-play-state: paused; }
         @keyframes mentor-scroll {
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
         .mentor-chip {
-            flex-shrink: 0;
-            width: 188px;
-            border-radius: 18px;
-            background: #ffffff;
-            border: 1.5px solid #e2e8f0;
-            overflow: hidden;
-            cursor: pointer;
+            flex-shrink: 0; width: 188px; border-radius: 18px;
+            background: #ffffff; border: 1.5px solid #e2e8f0;
+            overflow: hidden; cursor: pointer;
             transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
             user-select: none;
         }
         .mentor-chip:hover {
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            outline: 2px solid transparent;
+            border: 2px solid transparent; background-clip: padding-box; outline: 2px solid transparent;
             box-shadow: 0 0 0 2px #38bdf8, 0 0 0 4px #1e40af20, 0 14px 32px rgba(30,64,175,0.18);
             transform: translateY(-8px);
         }
-        .chip-avatar {
-            width: 100%;
-            height: 145px;
-            position: relative;
-            overflow: hidden;
-        }
-        .chip-avatar img {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; object-position: top center;
-            transition: transform 0.4s ease;
-        }
-        .mentor-chip:hover .chip-avatar img {
-            transform: scale(1.06);
-        }
-        .chip-avatar .chip-initials {
-            display: none;
-            position: absolute; inset: 0;
-            align-items: center; justify-content: center;
-            font-size: 1.8rem; font-weight: 800; color: white;
-            letter-spacing: 0.04em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        }
-        .chip-body {
-            padding: 10px 12px 13px;
-        }
-        .chip-name {
-            font-size: 13.5px; font-weight: 700;
-            color: #1e3a8a;
-            margin-bottom: 3px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .chip-school {
-            font-size: 10.5px;
-            color: #64748b;
-            margin-bottom: 7px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            line-height: 1.4;
-        }
-        .chip-badge {
-            display: inline-block;
-            font-size: 10px; font-weight: 600;
-            padding: 3px 9px;
-            border-radius: 999px;
-        }
+        .chip-avatar { width: 100%; height: 145px; position: relative; overflow: hidden; }
+        .chip-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.4s ease; }
+        .mentor-chip:hover .chip-avatar img { transform: scale(1.06); }
+        .chip-avatar .chip-initials { display: none; position: absolute; inset: 0; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: white; letter-spacing: 0.04em; text-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+        .chip-body { padding: 10px 12px 13px; }
+        .chip-name { font-size: 13.5px; font-weight: 700; color: #1e3a8a; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .chip-school { font-size: 10.5px; color: #64748b; margin-bottom: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+        .chip-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
 
         /* ===== MODAL ===== */
-        #mentor-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        #mentor-modal.open {
-            opacity: 1;
-            pointer-events: all;
-        }
-        #mentor-modal-backdrop {
-            position: absolute;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(6px);
-        }
-        #mentor-modal-content {
-            position: relative;
-            z-index: 1;
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            max-width: 480px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
-        }
+        #mentor-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #mentor-modal.open { opacity: 1; pointer-events: all; }
+        #mentor-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); }
+        #mentor-modal-content { position: relative; z-index: 1; background: white; border-radius: 28px; overflow: hidden; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; transform: scale(0.9); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 40px 80px rgba(0,0,0,0.3); }
         #mentor-modal.open #mentor-modal-content { transform: scale(1); }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem; right: 1rem;
-            z-index: 10;
-            width: 36px; height: 36px;
-            background: rgba(255,255,255,0.92);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            border: none;
-            transition: 0.2s;
-        }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 10; width: 36px; height: 36px; background: rgba(255,255,255,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: none; transition: 0.2s; }
         .modal-close:hover { background: white; transform: scale(1.1); }
-
-        .modal-avatar-section {
-            width: 100%; height: 220px;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
-        }
-        .modal-avatar-section img {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; object-position: top center;
-        }
-        .modal-avatar-section .modal-initials {
-            font-size: 3.5rem; font-weight: 800; color: white;
-            text-shadow: 0 4px 16px rgba(0,0,0,0.25);
-            position: relative; z-index: 1;
-            display: none;
-        }
+        .modal-avatar-section { width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .modal-avatar-section img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+        .modal-avatar-section .modal-initials { font-size: 3.5rem; font-weight: 800; color: white; text-shadow: 0 4px 16px rgba(0,0,0,0.25); position: relative; z-index: 1; display: none; }
         .modal-body { padding: 1.5rem 1.75rem 2rem; }
         .modal-name { font-size: 1.5rem; font-weight: 800; color: #1e3a8a; margin-bottom: 0.25rem; }
         .modal-univ { font-size: 0.875rem; color: #64748b; margin-bottom: 1rem; }
-        .modal-section-title {
-            font-size: 0.75rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.08em;
-            color: #94a3b8; margin: 1rem 0 0.5rem;
-        }
-        .modal-achievement-item {
-            display: flex; align-items: flex-start; gap: 0.5rem;
-            margin-bottom: 0.4rem; font-size: 0.875rem; color: #334155;
-        }
-        .modal-achievement-item .dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            flex-shrink: 0; margin-top: 0.45rem;
-        }
+        .modal-section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; margin: 1rem 0 0.5rem; }
+        .modal-achievement-item { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem; font-size: 0.875rem; color: #334155; }
+        .modal-achievement-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.45rem; }
 
-.experience-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 2rem;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-}
+        /* GAME CARD */
+        .game-card { perspective: 2000px; height: 260px; cursor: pointer; }
+        .game-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.9s; transform-style: preserve-3d; }
+        .game-card.flipped .game-card-inner { transform: rotateY(180deg); }
+        .game-front, .game-back { position: absolute; inset: 0; border-radius: 1.5rem; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .game-front { background: white; border: 1px solid #e2e8f0; }
+        .game-front img { width: 100%; height: 100%; object-fit: cover; }
+        .game-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.85), transparent 55%); }
+        .game-title { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; color: white; }
+        .game-title h4 { font-size: 1.1rem; font-weight: 700; }
+        .game-title p { font-size: 0.8rem; opacity: 0.9; margin-top: 0.2rem; }
+        .game-back { transform: rotateY(180deg); padding: 1.5rem; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; display: flex; flex-direction: column; justify-content: center; }
+        .game-back h4 { font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem; }
+        .game-back p { line-height: 1.7; color: rgba(255,255,255,0.92); font-size: 0.95rem; }
 
-.experience-header {
-    padding: 2rem 2rem 1rem;
-}
+        /* REWARD SHOP */
+        .reward-scroll { overflow-x: auto; padding-bottom: 1rem; }
+        .reward-scroll::-webkit-scrollbar { height: 8px; }
+        .reward-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+        .reward-row { display: flex; gap: 1rem; width: max-content; }
+        .reward-card { width: 190px; flex-shrink: 0; background: white; border-radius: 1.5rem; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; }
+        .reward-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(37,99,235,0.15); }
+        .reward-card img { width: 100%; height: 150px; object-fit: cover; }
+        .reward-body { padding: 1rem; }
+        .reward-name { font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+        .reward-xp { display: inline-flex; align-items: center; gap: 0.3rem; background: #eff6ff; color: #2563eb; padding: 0.35rem 0.7rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700; }
 
-.experience-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.experience-sub {
-    color: #64748b;
-    margin-top: 0.8rem;
-    line-height: 1.7;
-}
-
-/* GAME CARD */
-
-.game-card {
-    perspective: 2000px;
-    height: 260px;
-    cursor: pointer;
-}
-
-.game-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.9s;
-    transform-style: preserve-3d;
-}
-
-.game-card.flipped .game-card-inner {
-    transform: rotateY(180deg);
-}
-
-.game-front,
-.game-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.game-front {
-    background: white;
-    border: 1px solid #e2e8f0;
-}
-
-.game-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.game-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15,23,42,0.85), transparent 55%);
-}
-
-.game-title {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-    color: white;
-}
-
-.game-title h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-.game-title p {
-    font-size: 0.8rem;
-    opacity: 0.9;
-    margin-top: 0.2rem;
-}
-
-.game-back {
-    transform: rotateY(180deg);
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.game-back h4 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.game-back p {
-    line-height: 1.7;
-    color: rgba(255,255,255,0.92);
-    font-size: 0.95rem;
-}
-
-/* REWARD SHOP */
-
-.reward-scroll {
-    overflow-x: auto;
-    padding-bottom: 1rem;
-}
-
-.reward-scroll::-webkit-scrollbar {
-    height: 8px;
-}
-
-.reward-scroll::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 999px;
-}
-
-.reward-row {
-    display: flex;
-    gap: 1rem;
-    width: max-content;
-}
-
-.reward-card {
-    width: 190px;
-    flex-shrink: 0;
-    background: white;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-    transition: 0.3s;
-}
-
-.reward-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(37,99,235,0.15);
-}
-
-.reward-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.reward-body {
-    padding: 1rem;
-}
-
-.reward-name {
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
-}
-
-.reward-xp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: #eff6ff;
-    color: #2563eb;
-    padding: 0.35rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-}
-
-/* ACHIEVEMENT CARD */
-
-.achievement-card {
-    perspective: 2000px;
-    height: 320px;
-    cursor: pointer;
-}
-
-.achievement-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.9s;
-    transform-style: preserve-3d;
-}
-
-.achievement-card.flipped .achievement-inner {
-    transform: rotateY(180deg);
-}
-
-.achievement-front,
-.achievement-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 1.8rem;
-    overflow: hidden;
-    backface-visibility: hidden;
-}
-
-.achievement-front {
-    background: white;
-    border: 1px solid #e2e8f0;
-}
-
-.achievement-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.achievement-front::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15,23,42,0.92), transparent 60%);
-}
-
-.achievement-label {
-    position: absolute;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    right: 1.2rem;
-    color: white;
-    z-index: 2;
-}
-
-.achievement-label h4 {
-    font-size: 1.15rem;
-    font-weight: 800;
-}
-
-.achievement-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    padding: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.achievement-back h4 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.achievement-back p {
-    line-height: 1.7;
-    color: rgba(255,255,255,0.88);
-}
+        /* ACHIEVEMENT CARD */
+        .achievement-card { perspective: 2000px; height: 320px; cursor: pointer; }
+        .achievement-inner { position: relative; width: 100%; height: 100%; transition: transform 0.9s; transform-style: preserve-3d; }
+        .achievement-card.flipped .achievement-inner { transform: rotateY(180deg); }
+        .achievement-front, .achievement-back { position: absolute; inset: 0; border-radius: 1.8rem; overflow: hidden; backface-visibility: hidden; }
+        .achievement-front { background: white; border: 1px solid #e2e8f0; }
+        .achievement-front img { width: 100%; height: 100%; object-fit: cover; }
+        .achievement-front::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.92), transparent 60%); }
+        .achievement-label { position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem; color: white; z-index: 2; }
+        .achievement-label h4 { font-size: 1.15rem; font-weight: 800; }
+        .achievement-back { transform: rotateY(180deg); background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 1.6rem; display: flex; flex-direction: column; justify-content: center; }
+        .achievement-back h4 { font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem; }
+        .achievement-back p { line-height: 1.7; color: rgba(255,255,255,0.88); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -624,8 +288,6 @@
                 <div class="w-24 h-1 bg-cyan-400 mx-auto rounded-full"></div>
             </div>
             <div class="space-y-12">
-
-                <!-- USP 1: Mentor HSGQG — với carousel bên dưới -->
                 <div>
                     <div class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
                         <div class="w-full md:w-1/3 flex justify-center">
@@ -639,19 +301,13 @@
                             <p class="text-sm text-slate-400 mt-3 italic">Nhấn vào thẻ để xem chi tiết từng Mentor →</p>
                         </div>
                     </div>
-
-                    <!-- ===== MENTOR CAROUSEL ===== -->
                     <div class="mt-6 carousel-outer" id="mentor-carousel-outer">
-                        <div class="carousel-track" id="mentor-carousel-track">
-                            <!-- Cards injected by JS -->
-                        </div>
+                        <div class="carousel-track" id="mentor-carousel-track"></div>
                     </div>
                 </div>
-
-                <!-- USP 2 -->
                 <div class="flex flex-col md:flex-row-reverse items-center gap-10 bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-shadow">
                     <div class="w-full md:w-1/3 flex justify-center">
-                        <div class="w-32 h-32 bg-cyan-50 rounded-full flex items-center justify-content-center text-cyan-500 flex items-center justify-center">
+                        <div class="w-32 h-32 bg-cyan-50 rounded-full flex items-center justify-center text-cyan-500">
                             <i data-lucide="users" class="w-16 h-16"></i>
                         </div>
                     </div>
@@ -660,8 +316,6 @@
                         <p class="text-slate-600 text-lg">Chúng tôi nói KHÔNG với lớp học đại trà. Với tối đa 10 học sinh/lớp, Mentor nắm rõ điểm mạnh/yếu của từng bạn, đảm bảo <strong>100% thắc mắc được giải đáp tức thì</strong>.</p>
                     </div>
                 </div>
-
-                <!-- USP 3 -->
                 <div class="flex flex-col md:flex-row items-center gap-10 bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-shadow">
                     <div class="w-full md:w-1/3 flex justify-center">
                         <div class="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">
@@ -686,585 +340,64 @@
         </div>
     </section>
 
-    <!-- Gamification -->
- 
-
-<!-- 
-  SECTION: GAMIFIED EXPERIENCE (MASHUP VERSION)
-  - Khung cấu trúc Tabs động: Bản 2
-  - Màu nền, Glow, Dot pattern: Bản 1
-  - Hiệu ứng nội dung (Game Card, Reward Scroll, Achievement Card): Bản 1
-  - Content: Kết hợp chi tiết cả 2 bản
--->
-<section id="upgrid-experience" class="py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 text-slate-900">
-    
-    <!-- BACKGROUND GLOW & PATTERN (From Version 1) -->
-    <div class="absolute top-[-120px] right-[-120px] w-[500px] h-[500px] bg-blue-200/50 rounded-full blur-3xl opacity-70"></div>
-    <div class="absolute bottom-[-120px] left-[-120px] w-[500px] h-[500px] bg-cyan-200/50 rounded-full blur-3xl opacity-70"></div>
-    <div class="absolute inset-0 opacity-[0.05]"
-         style="background-image: radial-gradient(#1e40af 1px, transparent 1px); background-size: 28px 28px;">
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- TITLE (Combined style) -->
-        <div class="text-center mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-5 shadow-sm border border-blue-200">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                Học mà chơi - tiến bộ thật
+    <!-- Gamification Section -->
+    <section id="upgrid-experience" class="py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 text-slate-900">
+        <div class="absolute top-[-120px] right-[-120px] w-[500px] h-[500px] bg-blue-200/50 rounded-full blur-3xl opacity-70"></div>
+        <div class="absolute bottom-[-120px] left-[-120px] w-[500px] h-[500px] bg-cyan-200/50 rounded-full blur-3xl opacity-70"></div>
+        <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(#1e40af 1px, transparent 1px); background-size: 28px 28px;"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-5 shadow-sm border border-blue-200">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    Học mà chơi - tiến bộ thật
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-950">
+                    Trải Nghiệm Học Tập <span class="text-blue-600">Thế Hệ Mới</span>
+                </h2>
+                <p class="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                    UpGrid biến lớp học thành hành trình chinh phục đầy cảm hứng. Chúng tôi tập trung tạo động lực, ghi nhận sự tiến bộ và giúp học sinh luôn cảm thấy "mình làm được".
+                </p>
             </div>
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-950">
-                Trải Nghiệm Học Tập <span class="text-blue-600">Thế Hệ Mới</span>
-            </h2>
-            <p class="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed">
-                UpGrid biến lớp học thành hành trình chinh phục đầy cảm hứng. Chúng tôi tập trung tạo động lực, 
-                ghi nhận sự tiến bộ và giúp học sinh luôn cảm thấy “mình làm được”.
-            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <button onclick="switchEduTab('warmup')" id="btn-warmup"
+                    class="edu-tab-btn active group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-blue-100 hover:shadow-lg hover:-translate-y-1 hover:border-blue-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-blue-200">
+                        <i data-lucide="zap" class="text-blue-600 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-950">Warm-up Phản Xạ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Mini game đầu giờ giúp não bộ "khởi động", giảm áp lực và ôn kiến thức tự nhiên.</p>
+                    <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-500 rounded-t-full opacity-0 transition-opacity"></div>
+                </button>
+                <button onclick="switchEduTab('xp')" id="btn-xp"
+                    class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-purple-100 hover:shadow-lg hover:-translate-y-1 hover:border-purple-100">
+                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-purple-200">
+                        <i data-lucide="gift" class="text-purple-600 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-950">Tích Điểm Nhận Quà</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Mỗi nỗ lực (phát biểu, giải đúng, hỗ trợ bạn) đều được cộng XP đổi quà ngay.</p>
+                    <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-purple-500 rounded-t-full opacity-0 transition-opacity"></div>
+                </button>
+                <button onclick="switchEduTab('rank')" id="btn-rank"
+                    class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-orange-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-100">
+                    <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-orange-200">
+                        <i data-lucide="trophy" class="text-orange-600 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-950">Bảng Vàng Vinh Danh</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Ghi nhận sự kiên trì, tính sáng tạo và tinh thần đồng đội thay vì chỉ điểm số.</p>
+                    <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-orange-500 rounded-t-full opacity-0 transition-opacity"></div>
+                </button>
+            </div>
+            <div id="edu-content-panel" class="relative min-h-[450px] bg-white border border-slate-100 rounded-[2.5rem] shadow-xl shadow-blue-50/50 overflow-hidden transition-all duration-500"></div>
         </div>
+    </section>
 
-        <!-- 3 Cột trụ tương tác (Tabs structure from Version 2, styled for Light Mode) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <!-- Tab 1 -->
-            <button onclick="switchEduTab('warmup')" id="btn-warmup" 
-                class="edu-tab-btn active group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-blue-100 hover:shadow-lg hover:-translate-y-1 hover:border-blue-100">
-                <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-blue-200">
-                    <i data-lucide="zap" class="text-blue-600 w-6 h-6"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-950">Warm-up Phản Xạ</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">Mini game đầu giờ giúp não bộ “khởi động”, giảm áp lực và ôn kiến thức tự nhiên.</p>
-                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-500 rounded-t-full opacity-0 transition-opacity"></div>
-            </button>
+    <style>
+        .edu-tab-btn.active { background: #fff; border-color: rgba(59,130,246,0.2); box-shadow: 0 20px 40px rgba(59,130,246,0.1); transform: translateY(-5px); }
+        .edu-tab-btn.active .active-indicator { opacity: 1; }
+        .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 
-            <!-- Tab 2 -->
-            <button onclick="switchEduTab('xp')" id="btn-xp" 
-                class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-purple-100 hover:shadow-lg hover:-translate-y-1 hover:border-purple-100">
-                <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-purple-200">
-                    <i data-lucide="gift" class="text-purple-600 w-6 h-6"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-950">Tích Điểm Nhận Quà</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">Mỗi nỗ lực (phát biểu, giải đúng, hỗ trợ bạn) đều được cộng XP đổi quà ngay.</p>
-                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-purple-500 rounded-t-full opacity-0 transition-opacity"></div>
-            </button>
-
-            <!-- Tab 3 -->
-            <button onclick="switchEduTab('rank')" id="btn-rank" 
-                class="edu-tab-btn group relative p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm text-left transition-all duration-300 hover:shadow-orange-100 hover:shadow-lg hover:-translate-y-1 hover:border-orange-100">
-                <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-orange-200">
-                    <i data-lucide="trophy" class="text-orange-600 w-6 h-6"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-950">Bảng Vàng Vinh Danh</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">Ghi nhận sự kiên trì, tính sáng tạo và tinh thần đồng đội thay vì chỉ điểm số.</p>
-                <div class="active-indicator absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-orange-500 rounded-t-full opacity-0 transition-opacity"></div>
-            </button>
-        </div>
-
-        <!-- Panel chi tiết động (Container from Version 2, styled for Light Mode) -->
-        <div id="edu-content-panel" class="relative min-h-[450px] bg-white border border-slate-100 rounded-[2.5rem] shadow-xl shadow-blue-50/50 overflow-hidden transition-all duration-500">
-            <!-- Nội dung sẽ được Inject qua JS -->
-        </div>
-    </div>
-</section>
-
-<!-- CSS cho các hiệu ứng của Bản 1 và Khung của Bản 2 -->
-<style>
-    /* --- Styles cho Khung Tabs (Bản 2 adapt) --- */
-    .edu-tab-btn.active {
-        background: #fff;
-        border-color: rgba(59, 130, 246, 0.2); /* blue-200 */
-        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-        transform: translateY(-5px);
-    }
-    .edu-tab-btn.active .active-indicator {
-        opacity: 1;
-    }
-    
-    /* Animation xả nội dung */
-    .fade-in-up {
-        animation: fadeInUp 0.5s ease forwards;
-    }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Styles cho Hiệu ứng nội dung (Bản 1 bê sang) --- */
-    
-    /* 1. Game Cards Flip */
-    .game-card {
-        background-color: transparent;
-        height: 280px;
-        perspective: 1000px;
-        cursor: pointer;
-    }
-    .game-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-    }
-    .game-card.flipped .game-card-inner {
-        transform: rotateY(180px);
-    }
-    .game-front, .game-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        border-radius: 1.5rem;
-        overflow: hidden;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    .game-front img {
-        width: 100%;
-        height: 100%;
-        object-cover: cover;
-    }
-    .game-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
-    }
-    .game-title {
-        position: absolute;
-        bottom: 1.5rem;
-        left: 1.5rem;
-        right: 1.5rem;
-        color: white;
-    }
-    .game-title h4 { font-weight: 800; font-size: 1.25rem; }
-    .game-title p { opacity: 0.8; font-size: 0.875rem; }
-    
-    .game-back {
-        background: linear-gradient(135deg, #1e40af, #0891b2);
-        color: white;
-        transform: rotateY(180px);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .game-back h4 { font-weight: 800; font-size: 1.25rem; mb: 1rem; }
-    .game-back p { font-size: 0.95rem; leading-relaxed: 1.6; opacity: 0.9; }
-
-    /* 2. Reward Shop Scroll */
-    .reward-scroll {
-        overflow-x: auto;
-        padding-bottom: 1rem;
-        margin-top: 1rem;
-    }
-    .reward-scroll::-webkit-scrollbar { height: 6px; }
-    .reward-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
-    .reward-scroll::-webkit-scrollbar-thumb { background: #e9d5ff; border-radius: 10px; }
-    
-    .reward-row {
-        display: flex;
-        gap: 1.25rem;
-        width: max-content;
-    }
-    .reward-card {
-        background: white;
-        border: 1px solid #f1f5f9;
-        border-radius: 1rem;
-        width: 200px;
-        overflow: hidden;
-        transition: all 0.3s;
-        flex-shrink: 0;
-    }
-    .reward-card:hover { transform: translateY(-5px); shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #e9d5ff; }
-    .reward-card img { width: 100%; height: 140px; object-cover: cover; background: #f8fafc;}
-    .reward-body { padding: 1rem; }
-    .reward-name { font-weight: 700; font-size: 0.95rem; color: #0f172a; mb: 0.5rem; }
-    .reward-xp {
-        display: inline-flex;
-        items-center: center;
-        gap: 0.375rem;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        bg: #fdf4ff;
-        color: #a855f7;
-        font-weight: 700;
-        font-size: 0.825rem;
-        border: 1px solid #f5d0fe;
-    }
-
-    /* 3. Achievement Cards Flip (Gần giống game card) */
-    .achievement-card {
-        background-color: transparent;
-        height: 320px;
-        perspective: 1000px;
-        cursor: pointer;
-    }
-    .achievement-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-    }
-    .achievement-card.flipped .achievement-inner {
-        transform: rotateY(180px);
-    }
-    .achievement-front, .achievement-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        border-radius: 1.5rem;
-        overflow: hidden;
-        border: 1px solid #f1f5f9;
-    }
-    .achievement-front {
-        background: white;
-    }
-    .achievement-front img {
-        width: 100%;
-        height: 100%;
-        object-cover: cover;
-    }
-    .achievement-label {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(to top, rgba(255,255,255,1) 70%, transparent);
-        padding: 1.5rem;
-        padding-top: 3rem;
-        text-align: center;
-    }
-    .achievement-label h4 {
-        font-weight: 800;
-        font-size: 1.125rem;
-        color: #0f172a;
-        background: linear-gradient(120deg, #f97316, #f59e0b);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .achievement-back {
-        background: linear-gradient(135deg, #f97316, #f59e0b);
-        color: white;
-        transform: rotateY(180px);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .achievement-back h4 { font-weight: 800; font-size: 1.25rem; mb: 1rem; }
-    .achievement-back p { font-size: 0.9rem; leading-relaxed: 1.6; opacity: 0.95; }
-</style>
-
-<!-- JavaScript điều khiển Tabs và Inject nội dung kèm hiệu ứng -->
-<script>
-    // Data kết hợp: Content chi tiết + Cấu trúc HTML mang hiệu ứng của Bản 1
-    const eduData = {
-        warmup: `
-            <div class="p-8 lg:p-12 fade-in-up">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
-                    <div>
-                        <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
-                            <i data-lucide="zap" class="w-7 h-7 text-yellow-500"></i>
-                            Hoạt Động Warm-up Đầu Giờ
-                        </h4>
-                        <p class="text-slate-600 mt-2 max-w-2xl">Đánh thức tư duy bằng các mini-game logic, giúp học sinh ôn lại kiến thức cũ một cách tự nhiên và hào hứng.</p>
-                    </div>
-                    <span class="text-xs font-mono text-slate-400 bg-slate-50 px-3 py-1 rounded-full border">duration: 5-10 mins</span>
-                </div>
-                
-                <!-- Grid Game Cards với hiệu ứng Flip từ Bản 1 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                    <!-- GAME 1 -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-                            <div class="game-front">
-                                <!-- THAY ẢNH THẬT VÀO ĐÂY -->
-                                <img src="assets/warmup/Game 1.jpeg" alt="Truy Kích Công Thức">
-                                <div class="game-overlay"></div>
-                                <div class="game-title">
-                                    <h4>Truy Kích Công Thức</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-                            <div class="game-back">
-                                <h4>Truy Kích Công Thức</h4>
-                                <p>Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng. Ai phản xạ nhanh và chính xác sẽ ghi điểm.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GAME 2 -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-                            <div class="game-front">
-                                <img src="assets/warmup/Game 2.jpeg" alt="Săn Lỗi Sai">
-                                <div class="game-overlay"></div>
-                                <div class="game-title">
-                                    <h4>Săn Lỗi Sai (Error Hunter)</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-                            <div class="game-back">
-                                <h4>Error Hunter</h4>
-                                <p>Mentor đưa ra một lời giải có lỗi sai tinh vi. Nhiệm vụ của học sinh đóng vai thám tử tìm và sửa lại cho đúng nhanh nhất.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GAME 3 -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-                            <div class="game-front">
-                                <img src="assets/warmup/Game 3.jpeg" alt="Đua Não 30s">
-                                <div class="game-overlay"></div>
-                                <div class="game-title">
-                                    <h4>Đua Não 30s</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-                            <div class="game-back">
-                                <h4>Đua Não 30s</h4>
-                                <p>Trong 30s phút, học sinh giải liên tiếp các câu hỏi phản xạ nhanh. Càng đúng nhiều câu xâu chuỗi, combo XP càng lớn.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GAME 4 -->
-                    <div class="game-card" onclick="this.classList.toggle('flipped')">
-                        <div class="game-card-inner">
-                            <div class="game-front">
-                                <img src="assets/warmup/Game 4.jpeg" alt="Săn Boss Toán Học">
-                                <div class="game-overlay"></div>
-                                <div class="game-title">
-                                    <h4>Săn Boss Toán Học</h4>
-                                    <p>Click để xem luật chơi</p>
-                                </div>
-                            </div>
-                            <div class="game-back">
-                                <h4>Teamwork Săn Boss</h4>
-                                <p>Cả lớp cùng teamwork giải một bài toán siêu khó ("boss"). Mỗi bước giải đúng sẽ mở khóa thêm gợi ý hoặc "vũ khí" tiếp theo.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        `,
-        xp: `
-            <div class="p-8 lg:p-12 fade-in-up">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
-                    <div>
-                        <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
-                            <i data-lucide="gem" class="w-7 h-7 text-purple-500"></i>
-                            Cơ Chế Tích XP & Đổi Quà (XP Store)
-                        </h4>
-                        <p class="text-slate-600 mt-2 max-w-2xl">Tại UpGrid, mọi nỗ lực đều được ghi nhận tức thì. Học sinh tích lũy điểm kinh nghiệm (XP) live ngay trong buổi học để đổi những phần quà cực cool.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                    <!-- Cách kiếm điểm (From V2 content) -->
-                    <div class="lg:col-span-1 space-y-4">
-                        <h5 class="font-bold text-slate-900 mb-4">Làm sao để nhận XP?</h5>
-                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                            <i data-lucide="message-square" class="w-5 h-5 text-purple-500"></i>
-                            <span class="text-sm text-slate-700">Hăng hái phát biểu xây dựng bài</span>
-                        </div>
-                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-purple-500"></i>
-                            <span class="text-sm text-slate-700">Giải đúng bài tập tại lớp & về nhà</span>
-                        </div>
-                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                            <i data-lucide="users" class="w-5 h-5 text-purple-500"></i>
-                            <span class="text-sm text-slate-700">Hỗ trợ bạn bè trong nhóm (Mini Mentor)</span>
-                        </div>
-                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                            <i data-lucide="book-open" class="w-5 h-5 text-purple-500"></i>
-                            <span class="text-sm text-slate-700">Vở sạch chữ đẹp, ghi chú thông minh</span>
-                        </div>
-                    </div>
-
-                    <!-- Cửa hàng quà tặng với hiệu ứng cuộn ngang từ Bản 1 -->
-                    <div class="lg:col-span-2 bg-purple-50/50 rounded-3xl p-6 border border-purple-100">
-                        <h5 class="font-bold text-purple-950 mb-2 flex items-center gap-2">
-                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                            UpGrid Reward Shop
-                        </h5>
-                        
-                        <div class="reward-scroll">
-                            <div class="reward-row">
-                                <!-- ITEM 1 -->
-                                <div class="reward-card">
-                                    <img src="assets/tich-diem-doi-qua/blind_box.png" alt="Blind Box">
-                                    <div class="reward-body">
-                                        <div class="reward-name">Blind Box Toán Học</div>
-                                        <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5 fill-purple-400"></i> 150 XP</div>
-                                    </div>
-                                </div>
-                                <!-- ITEM 2 -->
-                                <div class="reward-card">
-                                    <img src="assets/tich-diem-doi-qua/the_mien_bai_tap.png" alt="Thẻ miễn bài">
-                                    <div class="reward-body">
-                                        <div class="reward-name">Thẻ Miễn Bài Tập</div>
-                                        <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5 fill-purple-400"></i> 220 XP</div>
-                                    </div>
-                                </div>
-                                <!-- ITEM 3 -->
-                                <div class="reward-card">
-                                    <img src="assets/tich-diem-doi-qua/but_chien_than.png" alt="Bút">
-                                    <div class="reward-body">
-                                        <div class="reward-name">Bút Chiến Thần</div>
-                                        <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5 fill-purple-400"></i> 300 XP</div>
-                                    </div>
-                                </div>
-                                <!-- ITEM 4 -->
-                                <div class="reward-card">
-                                    <img src="assets/tich-diem-doi-qua/snack_hoc_ba.png" alt="Snack">
-                                    <div class="reward-body">
-                                        <div class="reward-name">Combo Snack Học Bá</div>
-                                        <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5 fill-purple-400"></i> 450 XP</div>
-                                    </div>
-                                </div>
-                                <!-- ITEM 5 -->
-                                <div class="reward-card">
-                                    <img src="assets/tich-diem-doi-qua/ao_upgrid.png" alt="Áo">
-                                    <div class="reward-body">
-                                        <div class="reward-name">Áo Limited UpGrid</div>
-                                        <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5 fill-purple-400"></i> 1200 XP</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `,
-        rank: `
-            <div class="p-8 lg:p-12 fade-in-up">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
-                    <div>
-                        <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
-                            <i data-lucide="trophy" class="w-7 h-7 text-orange-500"></i>
-                            Bảng Vàng Thành Tích & Hệ Thống Badge
-                        </h4>
-                        <p class="text-slate-600 mt-2 max-w-2xl">UpGrid không chỉ tôn vinh điểm số cao nhất, mà quan trọng hơn là vinh danh sự cố gắng vượt bậc, tính sáng tạo và tinh thần hỗ trợ đồng đội.</p>
-                    </div>
-                </div>
-
-                <!-- Grid Achievement Cards với hiệu ứng Flip từ Bản 1 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                    <!-- BADGE 1 -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-                            <div class="achievement-front">
-                                <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80" alt="Chiến thần kỷ luật">
-                                <div class="achievement-label">
-                                    <h4>Chiến Thần Kỷ Luật</h4>
-                                    <p class="text-xs text-slate-500 mt-1">Click xem ý nghĩa</p>
-                                </div>
-                            </div>
-                            <div class="achievement-back">
-                                <h4>The Discipline Master</h4>
-                                <i data-lucide="shield-check" class="w-12 h-12 mb-4 opacity-80"></i>
-                                <p>Dành cho học sinh giữ chuỗi hoàn thành bài tập đầy đủ và đúng hạn dài nhất. Xây dựng tính bền bỉ.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- BADGE 2 -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-                            <div class="achievement-front">
-                                <img src="https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=400&q=80" alt="Nhà phát minh">
-                                <div class="achievement-label">
-                                    <h4>Nhà Phát Minh</h4>
-                                    <p class="text-xs text-slate-500 mt-1">Click xem ý nghĩa</p>
-                                </div>
-                            </div>
-                            <div class="achievement-back">
-                                <h4>Creative Thinker</h4>
-                                <i data-lucide="lightbulb" class="w-12 h-12 mb-4 opacity-80"></i>
-                                <p>Vinh danh học sinh nghĩ ra cách giải mới, độc đáo hoặc lời giải ngắn gọn bất ngờ. Khuyến khích tư duy phản biện.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- BADGE 3 -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-                            <div class="achievement-front">
-                                <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=400&q=80" alt="Mentor nhí">
-                                <div class="achievement-label">
-                                    <h4>Mentor Nhí</h4>
-                                    <p class="text-xs text-slate-500 mt-1">Click xem ý nghĩa</p>
-                                </div>
-                            </div>
-                            <div class="achievement-back">
-                                <h4>Mini Mentor</h4>
-                                <i data-lucide="heart" class="w-12 h-12 mb-4 opacity-80"></i>
-                                <p>Dành cho bạn thường xuyên nỗ lực giảng lại bài cho bạn cùng bàn hoặc hỗ trợ nhóm hoàn thành thử thách.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- BADGE 4 -->
-                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
-                        <div class="achievement-inner">
-                            <div class="achievement-front">
-                                <img src="https://images.unsplash.com/photo-1557682260-96773eb0237a?auto=format&fit=crop&w=400&q=80" alt="Growth Master">
-                                <div class="achievement-label">
-                                    <h4>Growth Master</h4>
-                                    <p class="text-xs text-slate-500 mt-1">Click xem ý nghĩa</p>
-                                </div>
-                            </div>
-                            <div class="achievement-back">
-                                <h4>Bứt Phá Ngoạn Mục</h4>
-                                <i data-lucide="trending-up" class="w-12 h-12 mb-4 opacity-80"></i>
-                                <p>Vinh danh học sinh có sự tiến bộ vượt bậc so với chính mình ở đầu kỳ học, không kể điểm số tuyệt đối.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        `
-    };
-
-    function switchEduTab(tabId) {
-        // 1. Cập nhật trạng thái Button (V2 logic)
-        document.querySelectorAll('.edu-tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(`btn-${tabId}`).classList.add('active');
-
-        // 2. Thay đổi Content với hiệu ứng fade-in
-        const panel = document.getElementById('edu-content-panel');
-        
-        // Tạo hiệu ứng chuyển mượt bằng cách fade out trước
-        panel.style.opacity = 0;
-        
-        setTimeout(() => {
-            panel.innerHTML = eduData[tabId];
-            // Khởi tạo lại Lucide icons cho content mới được inject
-            lucide.createIcons();
-            panel.style.opacity = 1;
-        }, 150); // Đợi 1 chút trùng với transition css
-    }
-
-    // Khởi tạo mặc định khi trang load xong
-    document.addEventListener('DOMContentLoaded', () => {
-        // Load tab đầu tiên
-        switchEduTab('warmup');
-        
-        // Thêm scroll listener để highlight section nếu cần (tùy chọn)
-        // lucide.createIcons(); // Đã gọi trong switchTab
-    });
-</script>
     <!-- Registration -->
     <section id="uu-dai" class="py-20 bg-slate-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1300,15 +433,15 @@
                     <form id="registration-form" class="space-y-5">
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-1">Họ và tên Phụ huynh *</label>
-                            <input type="text" id="parent_name" name="parent_name" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white" placeholder="Nhập họ tên...">
+                            <input type="text" id="parent_name" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white" placeholder="Nhập họ tên...">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-1">Số điện thoại liên hệ *</label>
-                            <input type="tel" id="phone_number" name="phone_number" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white" placeholder="09xx xxx xxx">
+                            <input type="tel" id="phone_number" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white" placeholder="09xx xxx xxx">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-1">Con đang học lớp mấy? (Năm học tới)</label>
-                            <select id="student_grade" name="student_grade" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white">
+                            <select id="student_grade" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50 focus:bg-white">
                                 <option value="">-- Chọn lớp --</option>
                                 <option value="6">Lớp 6</option>
                                 <option value="7">Lớp 7</option>
@@ -1316,12 +449,16 @@
                                 <option value="9">Lớp 9</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full btn-primary text-white font-bold text-lg py-4 rounded-xl mt-4 shadow-lg flex justify-center items-center gap-2">
+                        <button type="submit" id="submit-btn" class="w-full btn-primary text-white font-bold text-lg py-4 rounded-xl mt-4 shadow-lg flex justify-center items-center gap-2">
                             GỬI ĐĂNG KÝ NGAY <i data-lucide="send" class="w-5 h-5"></i>
                         </button>
                         <div id="success-msg" class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl flex items-center gap-2 border border-green-200">
                             <i data-lucide="check-circle" class="w-5 h-5"></i>
                             <p class="font-medium text-sm">Đăng ký thành công! UpGrid sẽ liên hệ với Ba Mẹ trong vòng 24h.</p>
+                        </div>
+                        <div id="error-msg" class="hidden mt-4 p-4 bg-red-50 text-red-700 rounded-xl flex items-center gap-2 border border-red-200">
+                            <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            <p id="error-text" class="font-medium text-sm"></p>
                         </div>
                         <p class="text-center text-xs text-slate-400 mt-4 flex justify-center items-center gap-1">
                             <i data-lucide="shield-check" class="w-3 h-3"></i> Cam kết bảo mật thông tin tuyệt đối
@@ -1356,7 +493,7 @@
         </div>
     </footer>
 
-    <!-- ===== MENTOR MODAL ===== -->
+    <!-- Mentor Modal -->
     <div id="mentor-modal" role="dialog" aria-modal="true">
         <div id="mentor-modal-backdrop" onclick="closeModal()"></div>
         <div id="mentor-modal-content">
@@ -1367,6 +504,7 @@
         </div>
     </div>
 
+    <!-- ✅ DUY NHẤT 1 SCRIPT BLOCK CUỐI TRANG -->
     <script>
         lucide.createIcons();
 
@@ -1374,197 +512,31 @@
         function driveImg(id) { return `https://lh3.googleusercontent.com/d/${id}`; }
 
         const mentors = [
-            {
-                name: 'Đỗ Tuấn Anh',
-                photo: driveImg('1gioEqANXFaTQF-VXUwPPSNrwODmhmMSt'),
-                grad: 'linear-gradient(135deg, #1e40af, #38bdf8)',
-                initials: 'TA',
-                school: 'ĐH Ngoại Thương • Chuyên Nguyễn Trãi HD',
-                badge: 'HSG Quốc Gia',
-                badgeBg: '#dbeafe', badgeCol: '#1e40af',
-                exp: '4 năm kinh nghiệm',
-                achievements: [
-                    'Giải Nhì HSG tỉnh môn Toán 2022',
-                    'Giải Khuyến khích HSG Quốc Gia môn Toán 2022',
-                    'Giải 3 Olympic Toán sinh viên toàn quốc 2023',
-                ],
-                teaching: [
-                    '4 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2',
-                    'Nhiều học sinh đạt 9+ môn Toán trong kì thi vào 10',
-                    'Có kinh nghiệm ôn chuyên, nhiều học sinh đỗ chuyên',
-                    'Phương pháp: Maieutics (Gợi mở) và tư duy kiến tạo — giúp học sinh thoát khỏi lối mòn "nghe-chép"',
-                ]
-            },
-            {
-                name: 'Vũ Tuấn Minh',
-                photo: driveImg('1XAkLl1JwK_RlbvPT6xskH2bsyYUzh979'),
-                grad: 'linear-gradient(135deg, #0f766e, #06b6d4)',
-                initials: 'TM',
-                school: 'ĐH Bách Khoa HN • Chuyên Nguyễn Trãi HD',
-                badge: 'HSG Quốc Gia',
-                badgeBg: '#ccfbf1', badgeCol: '#0f766e',
-                exp: '3 năm kinh nghiệm',
-                achievements: [
-                    'Thủ khoa đầu vào chuyên Toán: 60,25/60 — điểm tuyệt đối 10 toán chuyên, 10 toán',
-                    'Giải Nhì HSG Quốc Gia môn Toán 2022',
-                ],
-                teaching: [
-                    '3 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2',
-                    'Nhiều học sinh đạt 9+ môn Toán kì thi vào 10',
-                    'Có kinh nghiệm ôn chuyên, nhiều học sinh đỗ chuyên',
-                    'Phương pháp: Kết hợp kinh nghiệm thi đấu thực tế và tiếp cận hiện đại; cam kết lộ trình cá nhân hóa, chú trọng tư duy hình học và đại số chuyên sâu',
-                ]
-            },
-            {
-                name: 'Tạ Đình Tâm',
-                photo: driveImg('1d32cP_HXN5RPlmJMD5qdM6oHygz73mqu'),
-                grad: 'linear-gradient(135deg, #7c3aed, #a855f7)',
-                initials: 'ĐT',
-                school: 'ĐH Bách Khoa HN (tài năng) • Chuyên Nguyễn Trãi HD',
-                badge: 'VMO Silver',
-                badgeBg: '#f3e8ff', badgeCol: '#7c3aed',
-                exp: '2 năm kinh nghiệm',
-                achievements: [
-                    'Giải Nhì VMO — tham gia vòng chọn đội tuyển Olympic quốc tế',
-                    'Giải Nhất tỉnh Hải Phòng (Hải Dương cũ) môn Toán',
-                    '1 Huy chương Bạc duyên hải Bắc Bộ',
-                    '1 Huy chương Vàng Olympic Khoa học tự nhiên',
-                ],
-                teaching: [
-                    '2 năm kinh nghiệm ôn Toán chuyển cấp',
-                    '1 năm kinh nghiệm ôn đội tuyển Toán chuyên',
-                    'Phương pháp: Tập trung khai thác tư duy Problem Solving và kỹ thuật "nghĩ ngược" trong toán học nâng cao',
-                ]
-            },
-            {
-                name: 'Nguyễn Danh Thái',
-                photo: driveImg('1BbhE2XuYjEhrhn1c3H_XbMTjdHEPJ8Lh'),
-                grad: 'linear-gradient(135deg, #b45309, #f59e0b)',
-                initials: 'DT',
-                school: 'ĐH Bách Khoa HN (tài năng) • Chuyên Nguyễn Trãi HD',
-                badge: 'HSG Quốc Gia',
-                badgeBg: '#fef3c7', badgeCol: '#b45309',
-                exp: '2 năm kinh nghiệm',
-                achievements: [
-                    'Giải Ba HSG Quốc Gia môn Toán 2024',
-                    'Giải Nhì HSG tỉnh môn Toán 2024',
-                    '1 Huy chương Bạc Olympic Toán Duyên hải và đồng bằng Bắc Bộ 2023',
-                    '1 Huy chương Vàng Olympic Toán Khoa học tự nhiên 2023',
-                ],
-                teaching: [
-                    '2 năm kinh nghiệm ôn Toán chuyển cấp',
-                    '1 năm kinh nghiệm ôn đội tuyển Toán chuyên',
-                    'Phương pháp: Đồng hành cùng học sinh xây dựng nền tảng logic vững chắc, rèn kỹ năng trình bày chuẩn xác và tối ưu thời gian làm bài dưới áp lực phòng thi',
-                ]
-            },
-            {
-                name: 'Nguyễn Hữu Duy',
-                photo: driveImg('1Xc6ctY9u9T4_xxr-3x6s_GmNzkPrf3QA'),
-                grad: 'linear-gradient(135deg, #be185d, #f43f5e)',
-                initials: 'HD',
-                school: 'ĐH Ngoại Thương (Kinh tế đối ngoại)',
-                badge: 'HSG Tỉnh',
-                badgeBg: '#ffe4e6', badgeCol: '#be185d',
-                exp: '4 năm kinh nghiệm',
-                achievements: [
-                    '10 điểm môn Toán kỳ thi vào lớp 10 tỉnh Thanh Hóa',
-                    'Giải Nhất HSG môn Toán tỉnh Thanh Hóa',
-                    '124 điểm ĐGNL ĐHQG — top 20 toàn quốc',
-                    '5 giải Nhất Olympic Toán cấp trường ĐH Ngoại Thương',
-                    '2 Huy chương Bạc Olympic Toán học sinh sinh viên toàn quốc',
-                ],
-                teaching: [
-                    '4 năm kinh nghiệm giảng dạy gia sư và đứng lớp các cấp',
-                    'Nhiều học sinh đỗ trường đại học top (Ngoại Thương, Bách Khoa, RMIT...)',
-                    'Phương pháp: Tập trung phát triển tư duy logic và kỹ năng giải bài tập hiệu quả',
-                ]
-            },
-            {
-                name: 'Nguyễn Khánh Huyền',
-                photo: driveImg('13WZAQYqKoFC293-N1ASEDEmzMZ62vari'),
-                grad: 'linear-gradient(135deg, #0369a1, #38bdf8)',
-                initials: 'KH',
-                school: 'ĐH Ngoại Thương • Chuyên Trần Phú HP',
-                badge: 'HSG Tỉnh',
-                badgeBg: '#e0f2fe', badgeCol: '#0369a1',
-                exp: '3 năm • 100+ học sinh',
-                achievements: [
-                    'Huy chương Bạc Olympic Toán sinh viên toàn quốc',
-                    'Giải Nhất tỉnh môn Toán 2018–2019',
-                    'Giải Nhì tỉnh môn Toán 2021–2022',
-                    '3 Giải Nhất Olympic Toán sinh viên',
-                ],
-                teaching: [
-                    '3 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2',
-                    '100+ học sinh theo học — 100% đỗ cấp 3',
-                    'Phương pháp: Hệ thống hóa kiến thức từ gốc rễ, giúp học sinh nắm chắc bản chất, xóa tan nỗi sợ hổng kiến thức, phù hợp với mọi năng lực',
-                ]
-            },
+            { name: 'Đỗ Tuấn Anh', photo: driveImg('1gioEqANXFaTQF-VXUwPPSNrwODmhmMSt'), grad: 'linear-gradient(135deg, #1e40af, #38bdf8)', initials: 'TA', school: 'ĐH Ngoại Thương • Chuyên Nguyễn Trãi HD', badge: 'HSG Quốc Gia', badgeBg: '#dbeafe', badgeCol: '#1e40af', exp: '4 năm kinh nghiệm', achievements: ['Giải Nhì HSG tỉnh môn Toán 2022', 'Giải Khuyến khích HSG Quốc Gia môn Toán 2022', 'Giải 3 Olympic Toán sinh viên toàn quốc 2023'], teaching: ['4 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2', 'Nhiều học sinh đạt 9+ môn Toán trong kì thi vào 10', 'Có kinh nghiệm ôn chuyên, nhiều học sinh đỗ chuyên', 'Phương pháp: Maieutics (Gợi mở) và tư duy kiến tạo'] },
+            { name: 'Vũ Tuấn Minh', photo: driveImg('1XAkLl1JwK_RlbvPT6xskH2bsyYUzh979'), grad: 'linear-gradient(135deg, #0f766e, #06b6d4)', initials: 'TM', school: 'ĐH Bách Khoa HN • Chuyên Nguyễn Trãi HD', badge: 'HSG Quốc Gia', badgeBg: '#ccfbf1', badgeCol: '#0f766e', exp: '3 năm kinh nghiệm', achievements: ['Thủ khoa đầu vào chuyên Toán: 60,25/60', 'Giải Nhì HSG Quốc Gia môn Toán 2022'], teaching: ['3 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2', 'Nhiều học sinh đạt 9+ môn Toán kì thi vào 10', 'Phương pháp: Kết hợp kinh nghiệm thi đấu thực tế và tiếp cận hiện đại'] },
+            { name: 'Tạ Đình Tâm', photo: driveImg('1d32cP_HXN5RPlmJMD5qdM6oHygz73mqu'), grad: 'linear-gradient(135deg, #7c3aed, #a855f7)', initials: 'ĐT', school: 'ĐH Bách Khoa HN (tài năng) • Chuyên Nguyễn Trãi HD', badge: 'VMO Silver', badgeBg: '#f3e8ff', badgeCol: '#7c3aed', exp: '2 năm kinh nghiệm', achievements: ['Giải Nhì VMO — tham gia vòng chọn đội tuyển Olympic quốc tế', 'Giải Nhất tỉnh Hải Phòng môn Toán', '1 HCB duyên hải Bắc Bộ', '1 HCV Olympic Khoa học tự nhiên'], teaching: ['2 năm kinh nghiệm ôn Toán chuyển cấp', 'Phương pháp: Problem Solving và kỹ thuật "nghĩ ngược"'] },
+            { name: 'Nguyễn Danh Thái', photo: driveImg('1BbhE2XuYjEhrhn1c3H_XbMTjdHEPJ8Lh'), grad: 'linear-gradient(135deg, #b45309, #f59e0b)', initials: 'DT', school: 'ĐH Bách Khoa HN (tài năng) • Chuyên Nguyễn Trãi HD', badge: 'HSG Quốc Gia', badgeBg: '#fef3c7', badgeCol: '#b45309', exp: '2 năm kinh nghiệm', achievements: ['Giải Ba HSG Quốc Gia môn Toán 2024', 'Giải Nhì HSG tỉnh môn Toán 2024', '1 HCB Olympic Toán Duyên hải 2023', '1 HCV Olympic Toán Khoa học tự nhiên 2023'], teaching: ['2 năm kinh nghiệm ôn Toán chuyển cấp', 'Phương pháp: Xây nền tảng logic, rèn kỹ năng trình bày chuẩn xác'] },
+            { name: 'Nguyễn Hữu Duy', photo: driveImg('1Xc6ctY9u9T4_xxr-3x6s_GmNzkPrf3QA'), grad: 'linear-gradient(135deg, #be185d, #f43f5e)', initials: 'HD', school: 'ĐH Ngoại Thương (Kinh tế đối ngoại)', badge: 'HSG Tỉnh', badgeBg: '#ffe4e6', badgeCol: '#be185d', exp: '4 năm kinh nghiệm', achievements: ['10 điểm môn Toán kỳ thi vào lớp 10 tỉnh Thanh Hóa', 'Giải Nhất HSG môn Toán tỉnh Thanh Hóa', '124 điểm ĐGNL ĐHQG — top 20 toàn quốc', '2 HCB Olympic Toán sinh viên toàn quốc'], teaching: ['4 năm kinh nghiệm giảng dạy gia sư và đứng lớp các cấp', 'Nhiều học sinh đỗ trường đại học top'] },
+            { name: 'Nguyễn Khánh Huyền', photo: driveImg('13WZAQYqKoFC293-N1ASEDEmzMZ62vari'), grad: 'linear-gradient(135deg, #0369a1, #38bdf8)', initials: 'KH', school: 'ĐH Ngoại Thương • Chuyên Trần Phú HP', badge: 'HSG Tỉnh', badgeBg: '#e0f2fe', badgeCol: '#0369a1', exp: '3 năm • 100+ học sinh', achievements: ['HCB Olympic Toán sinh viên toàn quốc', 'Giải Nhất tỉnh môn Toán 2018–2019', 'Giải Nhì tỉnh môn Toán 2021–2022'], teaching: ['3 năm kinh nghiệm giảng dạy gia sư và đứng lớp cấp 2', '100+ học sinh theo học — 100% đỗ cấp 3', 'Phương pháp: Hệ thống hóa kiến thức từ gốc rễ'] },
         ];
 
-        /* ===== BUILD CAROUSEL ===== */
         function buildChip(m) {
             const chip = document.createElement('div');
             chip.className = 'mentor-chip';
-            chip.innerHTML = `
-                <div class="chip-avatar" style="background: ${m.grad};">
-                    <img
-                        src="${m.photo}"
-                        alt="${m.name}"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    />
-                    <div class="chip-initials">${m.initials}</div>
-                </div>
-                <div class="chip-body">
-                    <div class="chip-name">${m.name}</div>
-                    <div class="chip-school">${m.school}</div>
-                    <span class="chip-badge" style="background:${m.badgeBg}; color:${m.badgeCol};">${m.badge}</span>
-                </div>
-            `;
+            chip.innerHTML = `<div class="chip-avatar" style="background:${m.grad};"><img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/><div class="chip-initials">${m.initials}</div></div><div class="chip-body"><div class="chip-name">${m.name}</div><div class="chip-school">${m.school}</div><span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};">${m.badge}</span></div>`;
             chip.addEventListener('click', () => openModal(m));
             return chip;
         }
 
         (function initCarousel() {
             const track = document.getElementById('mentor-carousel-track');
-            // Render mentors twice for seamless infinite loop
             [...mentors, ...mentors].forEach(m => track.appendChild(buildChip(m)));
         })();
 
-        /* ===== MODAL ===== */
         function openModal(m) {
-            const achHTML = m.achievements.map(a => `
-                <div class="modal-achievement-item">
-                    <span class="dot" style="background: ${m.badgeCol};"></span>
-                    <span>${a}</span>
-                </div>`).join('');
-
-            const teachHTML = m.teaching.map(t => `
-                <div class="modal-achievement-item">
-                    <span class="dot" style="background: #94a3b8;"></span>
-                    <span>${t}</span>
-                </div>`).join('');
-
-            document.getElementById('modal-inner').innerHTML = `
-                <div class="modal-avatar-section" style="background: ${m.grad};">
-                    <img
-                        src="${m.photo}"
-                        alt="${m.name}"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    />
-                    <div class="modal-initials">${m.initials}</div>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-name">${m.name}</div>
-                    <div class="modal-univ">${m.school}</div>
-                    <span class="chip-badge" style="background:${m.badgeBg}; color:${m.badgeCol}; font-size:11px;">${m.badge} • ${m.exp}</span>
-                    <div class="modal-section-title">🏆 Thành tích tiêu biểu</div>
-                    ${achHTML}
-                    <div class="modal-section-title">📚 Kinh nghiệm giảng dạy</div>
-                    ${teachHTML}
-                </div>
-            `;
-
+            const achHTML = m.achievements.map(a => `<div class="modal-achievement-item"><span class="dot" style="background:${m.badgeCol};"></span><span>${a}</span></div>`).join('');
+            const teachHTML = m.teaching.map(t => `<div class="modal-achievement-item"><span class="dot" style="background:#94a3b8;"></span><span>${t}</span></div>`).join('');
+            document.getElementById('modal-inner').innerHTML = `<div class="modal-avatar-section" style="background:${m.grad};"><img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/><div class="modal-initials">${m.initials}</div></div><div class="modal-body"><div class="modal-name">${m.name}</div><div class="modal-univ">${m.school}</div><span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};font-size:11px;">${m.badge} • ${m.exp}</span><div class="modal-section-title">🏆 Thành tích tiêu biểu</div>${achHTML}<div class="modal-section-title">📚 Kinh nghiệm giảng dạy</div>${teachHTML}</div>`;
             document.getElementById('mentor-modal').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -1575,248 +547,79 @@
         }
 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    /* ===== EXPERIENCE SECTION ===== */
 
-const experienceData = {
+        /* ===== EDU TABS ===== */
+        const eduData = {
+            warmup: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="zap" class="w-7 h-7 text-yellow-500"></i>Hoạt Động Warm-up Đầu Giờ</h4><p class="text-slate-600 mt-2 max-w-2xl">Đánh thức tư duy bằng các mini-game logic, giúp học sinh ôn lại kiến thức cũ một cách tự nhiên và hào hứng.</p></div><span class="text-xs font-mono text-slate-400 bg-slate-50 px-3 py-1 rounded-full border">duration: 5-10 mins</span></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 1.jpeg" alt="Truy Kích Công Thức"><div class="game-overlay"></div><div class="game-title"><h4>Truy Kích Công Thức</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Truy Kích Công Thức</h4><p>Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng. Ai phản xạ nhanh và chính xác sẽ ghi điểm.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 2.jpeg" alt="Săn Lỗi Sai"><div class="game-overlay"></div><div class="game-title"><h4>Săn Lỗi Sai (Error Hunter)</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Error Hunter</h4><p>Mentor đưa ra một lời giải có lỗi sai tinh vi. Nhiệm vụ của học sinh đóng vai thám tử tìm và sửa lại cho đúng nhanh nhất.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 3.jpeg" alt="Đua Não 30s"><div class="game-overlay"></div><div class="game-title"><h4>Đua Não 30s</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Đua Não 30s</h4><p>Trong 30s, học sinh giải liên tiếp các câu hỏi phản xạ nhanh. Càng đúng nhiều câu xâu chuỗi, combo XP càng lớn.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 4.jpeg" alt="Săn Boss Toán Học"><div class="game-overlay"></div><div class="game-title"><h4>Săn Boss Toán Học</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Teamwork Săn Boss</h4><p>Cả lớp cùng teamwork giải một bài toán siêu khó ("boss"). Mỗi bước giải đúng sẽ mở khóa thêm gợi ý hoặc "vũ khí" tiếp theo.</p></div></div></div></div></div>`,
+            xp: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="gem" class="w-7 h-7 text-purple-500"></i>Cơ Chế Tích XP & Đổi Quà (XP Store)</h4><p class="text-slate-600 mt-2 max-w-2xl">Tại UpGrid, mọi nỗ lực đều được ghi nhận tức thì. Học sinh tích lũy điểm kinh nghiệm (XP) live ngay trong buổi học để đổi những phần quà cực cool.</p></div></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center"><div class="lg:col-span-1 space-y-4"><h5 class="font-bold text-slate-900 mb-4">Làm sao để nhận XP?</h5><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="message-square" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Hăng hái phát biểu xây dựng bài</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="check-circle" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Giải đúng bài tập tại lớp & về nhà</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="users" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Hỗ trợ bạn bè trong nhóm (Mini Mentor)</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="book-open" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Vở sạch chữ đẹp, ghi chú thông minh</span></div></div><div class="lg:col-span-2 bg-purple-50/50 rounded-3xl p-6 border border-purple-100"><h5 class="font-bold text-purple-950 mb-2 flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i>UpGrid Reward Shop</h5><div class="reward-scroll"><div class="reward-row"><div class="reward-card"><img src="assets/tich-diem-doi-qua/blind_box.png" alt="Blind Box"><div class="reward-body"><div class="reward-name">Blind Box Toán Học</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 150 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/the_mien_bai_tap.png" alt="Thẻ miễn bài"><div class="reward-body"><div class="reward-name">Thẻ Miễn Bài Tập</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 220 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/but_chien_than.png" alt="Bút"><div class="reward-body"><div class="reward-name">Bút Chiến Thần</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 300 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/snack_hoc_ba.png" alt="Snack"><div class="reward-body"><div class="reward-name">Combo Snack Học Bá</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 450 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/ao_upgrid.png" alt="Áo"><div class="reward-body"><div class="reward-name">Áo Limited UpGrid</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 1200 XP</div></div></div></div></div></div></div></div>`,
+            rank: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="trophy" class="w-7 h-7 text-orange-500"></i>Bảng Vàng Thành Tích & Hệ Thống Badge</h4><p class="text-slate-600 mt-2 max-w-2xl">UpGrid không chỉ tôn vinh điểm số cao nhất, mà quan trọng hơn là vinh danh sự cố gắng vượt bậc, tính sáng tạo và tinh thần hỗ trợ đồng đội.</p></div></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80" alt="Chiến thần kỷ luật"><div class="achievement-label"><h4>Chiến Thần Kỷ Luật</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>The Discipline Master</h4><i data-lucide="shield-check" class="w-12 h-12 mb-4 opacity-80"></i><p>Dành cho học sinh giữ chuỗi hoàn thành bài tập đầy đủ và đúng hạn dài nhất. Xây dựng tính bền bỉ.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=400&q=80" alt="Nhà phát minh"><div class="achievement-label"><h4>Nhà Phát Minh</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Creative Thinker</h4><i data-lucide="lightbulb" class="w-12 h-12 mb-4 opacity-80"></i><p>Vinh danh học sinh nghĩ ra cách giải mới, độc đáo hoặc lời giải ngắn gọn bất ngờ.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=400&q=80" alt="Mentor nhí"><div class="achievement-label"><h4>Mentor Nhí</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Mini Mentor</h4><i data-lucide="heart" class="w-12 h-12 mb-4 opacity-80"></i><p>Dành cho bạn thường xuyên nỗ lực giảng lại bài cho bạn cùng bàn hoặc hỗ trợ nhóm hoàn thành thử thách.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682260-96773eb0237a?auto=format&fit=crop&w=400&q=80" alt="Growth Master"><div class="achievement-label"><h4>Growth Master</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Bứt Phá Ngoạn Mục</h4><i data-lucide="trending-up" class="w-12 h-12 mb-4 opacity-80"></i><p>Vinh danh học sinh có sự tiến bộ vượt bậc so với chính mình ở đầu kỳ học, không kể điểm số tuyệt đối.</p></div></div></div></div></div>`
+        };
 
-    warmup: `
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-8 lg:p-10 items-center">
+        function switchEduTab(tabId) {
+            document.querySelectorAll('.edu-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+            const panel = document.getElementById('edu-content-panel');
+            panel.style.opacity = 0;
+            setTimeout(() => {
+                panel.innerHTML = eduData[tabId];
+                lucide.createIcons();
+                panel.style.opacity = 1;
+            }, 150);
+        }
 
-        <div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-5">
-                ⚡ Warm-up Phản Xạ
-            </div>
+        /* ===== INIT ===== */
+        document.addEventListener('DOMContentLoaded', function () {
+            // ✅ FIX 3: gọi switchEduTab bên trong DOMContentLoaded, tránh race condition
+            switchEduTab('warmup');
 
-            <h3 class="text-3xl font-bold text-slate-900 mb-5">
-                Khởi động não bộ trước mỗi buổi học
-            </h3>
+            /* ===== FORM SUBMIT → SUPABASE ===== */
+            const form       = document.getElementById('registration-form');
+            const submitBtn  = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg   = document.getElementById('error-msg');
+            const errorText  = document.getElementById('error-text');
 
-            <p class="text-slate-600 leading-relaxed mb-8 text-lg">
-                Thay vì hỏi bài căng thẳng, học sinh bắt đầu bằng các mini game phản xạ
-                giúp ôn lại kiến thức cũ một cách tự nhiên và đầy hứng thú.
-            </p>
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
 
-            <div class="space-y-4">
+                const parentName   = document.getElementById('parent_name').value.trim();
+                const phone        = document.getElementById('phone_number').value.trim();
+                const studentGrade = document.getElementById('student_grade').value;
 
-                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
-                    <div class="font-bold text-slate-900 mb-1">⚡ Tia Chớp Toán Học</div>
-                    <p class="text-slate-600 text-sm">10 câu hỏi phản xạ tốc độ với combo nhân điểm.</p>
-                </div>
+                if (!parentName || !phone) return;
 
-                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
-                    <div class="font-bold text-slate-900 mb-1">🧠 Săn Kho Báu Công Thức</div>
-                    <p class="text-slate-600 text-sm">Giải câu đố để mở khóa manh mối và tìm kho báu cuối.</p>
-                </div>
+                // Loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'ĐANG GỬI... <svg class="inline animate-spin w-5 h-5 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>';
+                successMsg.classList.add('hidden');
+                errorMsg.classList.add('hidden');
 
-                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
-                    <div class="font-bold text-slate-900 mb-1">🎯 Bắn Tỉa Đáp Án</div>
-                    <p class="text-slate-600 text-sm">Game chọn đáp án nhanh với thử thách chính xác tuyệt đối.</p>
-                </div>
+                try {
+                    const { error } = await _supabase
+                        .from('registrations')
+                        .insert([{
+                            parent_name:   parentName,
+                            phone_number:  phone,
+                            student_grade: studentGrade || null,
+                        }]);
 
-            </div>
-        </div>
+                    if (error) throw error;
 
-        <div class="relative">
-            <img src="YOUR_WARMUP_IMAGE"
-                class="rounded-[2rem] shadow-2xl object-cover w-full h-[500px] border border-slate-200">
+                    successMsg.classList.remove('hidden');
+                    form.reset();
 
-            <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-slate-100">
-                <div class="text-sm text-slate-500 font-medium">Warm-up hôm nay</div>
-                <div class="font-bold text-slate-900 text-lg mt-1">⚡ Tia Chớp Toán Học</div>
-                <div class="mt-3 flex gap-2">
-                    <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">+20 XP</span>
-                    <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">Combo x2</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    `,
+                } catch (err) {
+                    console.error('Supabase error:', err);
+                    errorText.textContent = err.message || 'Có lỗi xảy ra, vui lòng thử lại.';
+                    errorMsg.classList.remove('hidden');
 
-    reward: `
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-8 lg:p-10 items-center">
-
-        <div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold mb-5">
-                🎁 XP Reward System
-            </div>
-
-            <h3 class="text-3xl font-bold text-slate-900 mb-5">
-                Mỗi nỗ lực đều được ghi nhận
-            </h3>
-
-            <p class="text-slate-600 leading-relaxed mb-8 text-lg">
-                Học sinh nhận XP khi phát biểu, giải đúng, hỗ trợ bạn bè
-                hoặc hoàn thành thử thách trong lớp.
-            </p>
-
-            <div class="grid grid-cols-2 gap-4">
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🍬</div>
-                    <div class="font-bold">Candy Boost</div>
-                    <div class="text-sm text-slate-500 mt-1">20 XP</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🎁</div>
-                    <div class="font-bold">Mystery Box</div>
-                    <div class="text-sm text-slate-500 mt-1">150 XP</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🎒</div>
-                    <div class="font-bold">Balo UpGrid</div>
-                    <div class="text-sm text-slate-500 mt-1">500 XP</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">👑</div>
-                    <div class="font-bold">Ghế VIP Học Bá</div>
-                    <div class="text-sm text-slate-500 mt-1">700 XP</div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="relative">
-            <img src="YOUR_REWARD_IMAGE"
-                class="rounded-[2rem] shadow-2xl object-cover w-full h-[500px] border border-slate-200">
-
-            <div class="absolute top-6 right-6 bg-white rounded-2xl shadow-xl p-5 border border-slate-100">
-                <div class="text-sm text-slate-500 font-medium">XP hiện tại</div>
-                <div class="text-3xl font-extrabold text-blue-600 mt-1">1,280</div>
-                <div class="w-48 h-3 bg-slate-200 rounded-full mt-4 overflow-hidden">
-                    <div class="w-[70%] h-full bg-gradient-to-r from-blue-500 to-cyan-400"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    `,
-
-    achievement: `
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-8 lg:p-10 items-center">
-
-        <div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 text-sm font-semibold mb-5">
-                🏆 Achievement System
-            </div>
-
-            <h3 class="text-3xl font-bold text-slate-900 mb-5">
-                Thành tích không chỉ là điểm số
-            </h3>
-
-            <p class="text-slate-600 leading-relaxed mb-8 text-lg">
-                UpGrid ghi nhận cả sự kiên trì, sáng tạo và tinh thần hỗ trợ bạn bè
-                để học sinh phát triển toàn diện hơn.
-            </p>
-
-            <div class="grid grid-cols-2 gap-4">
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🔥</div>
-                    <div class="font-bold">Chuỗi Bất Bại</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🧠</div>
-                    <div class="font-bold">Bộ Não Sáng Tạo</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🛡️</div>
-                    <div class="font-bold">Gia Sư Nhí</div>
-                </div>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <div class="text-2xl mb-2">🚀</div>
-                    <div class="font-bold">Chiến Binh Vượt Cấp</div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="relative">
-            <img src="YOUR_ACHIEVEMENT_IMAGE"
-                class="rounded-[2rem] shadow-2xl object-cover w-full h-[500px] border border-slate-200">
-
-            <div class="absolute -bottom-6 right-6 bg-white rounded-2xl shadow-xl p-5 border border-slate-100 w-[260px]">
-                <div class="font-bold text-slate-900 mb-4">🔥 TOP XP TUẦN NÀY</div>
-
-                <div class="space-y-3 text-sm">
-
-                    <div class="flex items-center justify-between">
-                        <span>🥇 Minh Anh</span>
-                        <span class="font-bold text-blue-600">1280 XP</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <span>🥈 Gia Huy</span>
-                        <span class="font-bold text-blue-600">1210 XP</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <span>🥉 Đức Minh</span>
-                        <span class="font-bold text-blue-600">1190 XP</span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    `
-};
-
-function switchExperienceTab(tab) {
-
-    document.querySelectorAll('.experience-tab-btn').forEach(btn => {
-        btn.classList.remove('border-blue-500', 'shadow-xl');
-        btn.classList.add('border-slate-200');
-    });
-
-    document.getElementById(`tab-btn-${tab}`).classList.add('border-blue-500', 'shadow-xl');
-
-    document.getElementById('experience-content').innerHTML = experienceData[tab];
-
-    lucide.createIcons();
-}
-
-switchExperienceTab('warmup');
-
-// Handle Registration Form Submission
-document.getElementById('registration-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const successMsg = document.getElementById('success-msg');
-    
-    // Disable submit button and show loading text
-    submitBtn.disabled = true;
-    const originalBtnText = submitBtn.textContent;
-    submitBtn.textContent = 'ĐANG GỬI...';
-    
-    const parentName = document.getElementById('parent_name').value;
-    const phone = document.getElementById('phone_number').value;
-    const studentGrade = document.getElementById('student_grade').value;
-    
-    try {
-        const { data, error } = await _supabase
-            .from('registrations')
-            .insert([
-                { parent_name: parentName, phone_number: phone, student_grade: studentGrade }
-            ]);
-            
-        if (error) throw error;
-        
-        successMsg.classList.remove('hidden');
-        this.reset();
-    } catch (err) {
-        console.error('Lỗi lưu đăng ký:', err);
-        alert('Có lỗi xảy ra khi lưu thông tin đăng ký. Ba Mẹ vui lòng liên hệ trực tiếp với UpGrid hoặc thử lại!');
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-    }
-});
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'GỬI ĐĂNG KÝ NGAY <i data-lucide="send" class="w-5 h-5"></i>';
+                    lucide.createIcons();
+                }
+            });
+        });
     </script>
-  
 </body>
 </html>
