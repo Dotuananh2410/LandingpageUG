@@ -523,7 +523,17 @@
         function buildChip(m) {
             const chip = document.createElement('div');
             chip.className = 'mentor-chip';
-            chip.innerHTML = `<div class="chip-avatar" style="background:${m.grad};"><img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/><div class="chip-initials">${m.initials}</div></div><div class="chip-body"><div class="chip-name">${m.name}</div><div class="chip-school">${m.school}</div><span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};">${m.badge}</span></div>`;
+            chip.innerHTML = `
+                <div class="chip-avatar" style="background:${m.grad};">
+                    <img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                    <div class="chip-initials">${m.initials}</div>
+                </div>
+                <div class="chip-body">
+                    <div class="chip-name">${m.name}</div>
+                    <div class="chip-school">${m.school}</div>
+                    <span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};">${m.badge}</span>
+                </div>
+            `;
             chip.addEventListener('click', () => openModal(m));
             return chip;
         }
@@ -534,9 +544,38 @@
         })();
 
         function openModal(m) {
-            const achHTML = m.achievements.map(a => `<div class="modal-achievement-item"><span class="dot" style="background:${m.badgeCol};"></span><span>${a}</span></div>`).join('');
-            const teachHTML = m.teaching.map(t => `<div class="modal-achievement-item"><span class="dot" style="background:#94a3b8;"></span><span>${t}</span></div>`).join('');
-            document.getElementById('modal-inner').innerHTML = `<div class="modal-avatar-section" style="background:${m.grad};"><img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/><div class="modal-initials">${m.initials}</div></div><div class="modal-body"><div class="modal-name">${m.name}</div><div class="modal-univ">${m.school}</div><span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};font-size:11px;">${m.badge} • ${m.exp}</span><div class="modal-section-title">🏆 Thành tích tiêu biểu</div>${achHTML}<div class="modal-section-title">📚 Kinh nghiệm giảng dạy</div>${teachHTML}</div>`;
+            const achHTML = m.achievements.map(a => `
+                <div class="modal-achievement-item">
+                    <span class="dot" style="background:${m.badgeCol};"></span>
+                    <span>${a}</span>
+                </div>
+            `).join('');
+            
+            const teachHTML = m.teaching.map(t => `
+                <div class="modal-achievement-item">
+                    <span class="dot" style="background:#94a3b8;"></span>
+                    <span>${t}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('modal-inner').innerHTML = `
+                <div class="modal-avatar-section" style="background:${m.grad};">
+                    <img src="${m.photo}" alt="${m.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                    <div class="modal-initials">${m.initials}</div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-name">${m.name}</div>
+                    <div class="modal-univ">${m.school}</div>
+                    <span class="chip-badge" style="background:${m.badgeBg};color:${m.badgeCol};font-size:11px;">
+                        ${m.badge} • ${m.exp}
+                    </span>
+                    <div class="modal-section-title">🏆 Thành tích tiêu biểu</div>
+                    ${achHTML}
+                    <div class="modal-section-title">📚 Kinh nghiệm giảng dạy</div>
+                    ${teachHTML}
+                </div>
+            `;
+            
             document.getElementById('mentor-modal').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -550,9 +589,244 @@
 
         /* ===== EDU TABS ===== */
         const eduData = {
-            warmup: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="zap" class="w-7 h-7 text-yellow-500"></i>Hoạt Động Warm-up Đầu Giờ</h4><p class="text-slate-600 mt-2 max-w-2xl">Đánh thức tư duy bằng các mini-game logic, giúp học sinh ôn lại kiến thức cũ một cách tự nhiên và hào hứng.</p></div><span class="text-xs font-mono text-slate-400 bg-slate-50 px-3 py-1 rounded-full border">duration: 5-10 mins</span></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 1.jpeg" alt="Truy Kích Công Thức"><div class="game-overlay"></div><div class="game-title"><h4>Truy Kích Công Thức</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Truy Kích Công Thức</h4><p>Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng. Ai phản xạ nhanh và chính xác sẽ ghi điểm.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 2.jpeg" alt="Săn Lỗi Sai"><div class="game-overlay"></div><div class="game-title"><h4>Săn Lỗi Sai (Error Hunter)</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Error Hunter</h4><p>Mentor đưa ra một lời giải có lỗi sai tinh vi. Nhiệm vụ của học sinh đóng vai thám tử tìm và sửa lại cho đúng nhanh nhất.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 3.jpeg" alt="Đua Não 30s"><div class="game-overlay"></div><div class="game-title"><h4>Đua Não 30s</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Đua Não 30s</h4><p>Trong 30s, học sinh giải liên tiếp các câu hỏi phản xạ nhanh. Càng đúng nhiều câu xâu chuỗi, combo XP càng lớn.</p></div></div></div><div class="game-card" onclick="this.classList.toggle('flipped')"><div class="game-card-inner"><div class="game-front"><img src="assets/warmup/Game 4.jpeg" alt="Săn Boss Toán Học"><div class="game-overlay"></div><div class="game-title"><h4>Săn Boss Toán Học</h4><p>Click để xem luật chơi</p></div></div><div class="game-back"><h4>Teamwork Săn Boss</h4><p>Cả lớp cùng teamwork giải một bài toán siêu khó ("boss"). Mỗi bước giải đúng sẽ mở khóa thêm gợi ý hoặc "vũ khí" tiếp theo.</p></div></div></div></div></div>`,
-            xp: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="gem" class="w-7 h-7 text-purple-500"></i>Cơ Chế Tích XP & Đổi Quà (XP Store)</h4><p class="text-slate-600 mt-2 max-w-2xl">Tại UpGrid, mọi nỗ lực đều được ghi nhận tức thì. Học sinh tích lũy điểm kinh nghiệm (XP) live ngay trong buổi học để đổi những phần quà cực cool.</p></div></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center"><div class="lg:col-span-1 space-y-4"><h5 class="font-bold text-slate-900 mb-4">Làm sao để nhận XP?</h5><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="message-square" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Hăng hái phát biểu xây dựng bài</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="check-circle" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Giải đúng bài tập tại lớp & về nhà</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="users" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Hỗ trợ bạn bè trong nhóm (Mini Mentor)</span></div><div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100"><i data-lucide="book-open" class="w-5 h-5 text-purple-500"></i><span class="text-sm text-slate-700">Vở sạch chữ đẹp, ghi chú thông minh</span></div></div><div class="lg:col-span-2 bg-purple-50/50 rounded-3xl p-6 border border-purple-100"><h5 class="font-bold text-purple-950 mb-2 flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i>UpGrid Reward Shop</h5><div class="reward-scroll"><div class="reward-row"><div class="reward-card"><img src="assets/tich-diem-doi-qua/blind_box.png" alt="Blind Box"><div class="reward-body"><div class="reward-name">Blind Box Toán Học</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 150 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/the_mien_bai_tap.png" alt="Thẻ miễn bài"><div class="reward-body"><div class="reward-name">Thẻ Miễn Bài Tập</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 220 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/but_chien_than.png" alt="Bút"><div class="reward-body"><div class="reward-name">Bút Chiến Thần</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 300 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/snack_hoc_ba.png" alt="Snack"><div class="reward-body"><div class="reward-name">Combo Snack Học Bá</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 450 XP</div></div></div><div class="reward-card"><img src="assets/tich-diem-doi-qua/ao_upgrid.png" alt="Áo"><div class="reward-body"><div class="reward-name">Áo Limited UpGrid</div><div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 1200 XP</div></div></div></div></div></div></div></div>`,
-            rank: `<div class="p-8 lg:p-12 fade-in-up"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6"><div><h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3"><i data-lucide="trophy" class="w-7 h-7 text-orange-500"></i>Bảng Vàng Thành Tích & Hệ Thống Badge</h4><p class="text-slate-600 mt-2 max-w-2xl">UpGrid không chỉ tôn vinh điểm số cao nhất, mà quan trọng hơn là vinh danh sự cố gắng vượt bậc, tính sáng tạo và tinh thần hỗ trợ đồng đội.</p></div></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80" alt="Chiến thần kỷ luật"><div class="achievement-label"><h4>Chiến Thần Kỷ Luật</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>The Discipline Master</h4><i data-lucide="shield-check" class="w-12 h-12 mb-4 opacity-80"></i><p>Dành cho học sinh giữ chuỗi hoàn thành bài tập đầy đủ và đúng hạn dài nhất. Xây dựng tính bền bỉ.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=400&q=80" alt="Nhà phát minh"><div class="achievement-label"><h4>Nhà Phát Minh</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Creative Thinker</h4><i data-lucide="lightbulb" class="w-12 h-12 mb-4 opacity-80"></i><p>Vinh danh học sinh nghĩ ra cách giải mới, độc đáo hoặc lời giải ngắn gọn bất ngờ.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=400&q=80" alt="Mentor nhí"><div class="achievement-label"><h4>Mentor Nhí</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Mini Mentor</h4><i data-lucide="heart" class="w-12 h-12 mb-4 opacity-80"></i><p>Dành cho bạn thường xuyên nỗ lực giảng lại bài cho bạn cùng bàn hoặc hỗ trợ nhóm hoàn thành thử thách.</p></div></div></div><div class="achievement-card" onclick="this.classList.toggle('flipped')"><div class="achievement-inner"><div class="achievement-front"><img src="https://images.unsplash.com/photo-1557682260-96773eb0237a?auto=format&fit=crop&w=400&q=80" alt="Growth Master"><div class="achievement-label"><h4>Growth Master</h4><p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p></div></div><div class="achievement-back"><h4>Bứt Phá Ngoạn Mục</h4><i data-lucide="trending-up" class="w-12 h-12 mb-4 opacity-80"></i><p>Vinh danh học sinh có sự tiến bộ vượt bậc so với chính mình ở đầu kỳ học, không kể điểm số tuyệt đối.</p></div></div></div></div></div>`
+            warmup: `
+                <div class="p-8 lg:p-12 fade-in-up">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
+                                <i data-lucide="zap" class="w-7 h-7 text-yellow-500"></i>
+                                Hoạt Động Warm-up Đầu Giờ
+                            </h4>
+                            <p class="text-slate-600 mt-2 max-w-2xl">Đánh thức tư duy bằng các mini-game logic, giúp học sinh ôn lại kiến thức cũ một cách tự nhiên và hào hứng.</p>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400 bg-slate-50 px-3 py-1 rounded-full border">duration: 5-10 mins</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="game-card" onclick="this.classList.toggle('flipped')">
+                            <div class="game-card-inner">
+                                <div class="game-front">
+                                    <img src="assets/warmup/Game 1.jpeg" alt="Truy Kích Công Thức">
+                                    <div class="game-overlay"></div>
+                                    <div class="game-title">
+                                        <h4>Truy Kích Công Thức</h4>
+                                        <p>Click để xem luật chơi</p>
+                                    </div>
+                                </div>
+                                <div class="game-back">
+                                    <h4>Truy Kích Công Thức</h4>
+                                    <p>Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng. Ai phản xạ nhanh và chính xác sẽ ghi điểm.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-card" onclick="this.classList.toggle('flipped')">
+                            <div class="game-card-inner">
+                                <div class="game-front">
+                                    <img src="assets/warmup/Game 2.jpeg" alt="Săn Lỗi Sai">
+                                    <div class="game-overlay"></div>
+                                    <div class="game-title">
+                                        <h4>Săn Lỗi Sai (Error Hunter)</h4>
+                                        <p>Click để xem luật chơi</p>
+                                    </div>
+                                </div>
+                                <div class="game-back">
+                                    <h4>Error Hunter</h4>
+                                    <p>Mentor đưa ra một lời giải có lỗi sai tinh vi. Nhiệm vụ của học sinh đóng vai thám tử tìm và sửa lại cho đúng nhanh nhất.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-card" onclick="this.classList.toggle('flipped')">
+                            <div class="game-card-inner">
+                                <div class="game-front">
+                                    <img src="assets/warmup/Game 3.jpeg" alt="Đua Não 30s">
+                                    <div class="game-overlay"></div>
+                                    <div class="game-title">
+                                        <h4>Đua Não 30s</h4>
+                                        <p>Click để xem luật chơi</p>
+                                    </div>
+                                </div>
+                                <div class="game-back">
+                                    <h4>Đua Não 30s</h4>
+                                    <p>Trong 30s, học sinh giải liên tiếp các câu hỏi phản xạ nhanh. Càng đúng nhiều câu xâu chuỗi, combo XP càng lớn.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-card" onclick="this.classList.toggle('flipped')">
+                            <div class="game-card-inner">
+                                <div class="game-front">
+                                    <img src="assets/warmup/Game 4.jpeg" alt="Săn Boss Toán Học">
+                                    <div class="game-overlay"></div>
+                                    <div class="game-title">
+                                        <h4>Săn Boss Toán Học</h4>
+                                        <p>Click để xem luật chơi</p>
+                                    </div>
+                                </div>
+                                <div class="game-back">
+                                    <h4>Teamwork Săn Boss</h4>
+                                    <p>Cả lớp cùng teamwork giải một bài toán siêu khó ("boss"). Mỗi bước giải đúng sẽ mở khóa thêm gợi ý hoặc "vũ khí" tiếp theo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            xp: `
+                <div class="p-8 lg:p-12 fade-in-up">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
+                                <i data-lucide="gem" class="w-7 h-7 text-purple-500"></i>
+                                Cơ Chế Tích XP & Đổi Quà (XP Store)
+                            </h4>
+                            <p class="text-slate-600 mt-2 max-w-2xl">Tại UpGrid, mọi nỗ lực đều được ghi nhận tức thì. Học sinh tích lũy điểm kinh nghiệm (XP) live ngay trong buổi học để đổi những phần quà cực cool.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-1 space-y-4">
+                            <h5 class="font-bold text-slate-900 mb-4">Làm sao để nhận XP?</h5>
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <i data-lucide="message-square" class="w-5 h-5 text-purple-500"></i>
+                                <span class="text-sm text-slate-700">Hăng hái phát biểu xây dựng bài</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-purple-500"></i>
+                                <span class="text-sm text-slate-700">Giải đúng bài tập tại lớp & về nhà</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <i data-lucide="users" class="w-5 h-5 text-purple-500"></i>
+                                <span class="text-sm text-slate-700">Hỗ trợ bạn bè trong nhóm (Mini Mentor)</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <i data-lucide="book-open" class="w-5 h-5 text-purple-500"></i>
+                                <span class="text-sm text-slate-700">Vở sạch chữ đẹp, ghi chú thông minh</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2 bg-purple-50/50 rounded-3xl p-6 border border-purple-100">
+                            <h5 class="font-bold text-purple-950 mb-2 flex items-center gap-2">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                UpGrid Reward Shop
+                            </h5>
+                            <div class="reward-scroll">
+                                <div class="reward-row">
+                                    <div class="reward-card">
+                                        <img src="assets/tich-diem-doi-qua/blind_box.png" alt="Blind Box">
+                                        <div class="reward-body">
+                                            <div class="reward-name">Blind Box Toán Học</div>
+                                            <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 150 XP</div>
+                                        </div>
+                                    </div>
+                                    <div class="reward-card">
+                                        <img src="assets/tich-diem-doi-qua/the_mien_bai_tap.png" alt="Thẻ miễn bài">
+                                        <div class="reward-body">
+                                            <div class="reward-name">Thẻ Miễn Bài Tập</div>
+                                            <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 220 XP</div>
+                                        </div>
+                                    </div>
+                                    <div class="reward-card">
+                                        <img src="assets/tich-diem-doi-qua/but_chien_than.png" alt="Bút">
+                                        <div class="reward-body">
+                                            <div class="reward-name">Bút Chiến Thần</div>
+                                            <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 300 XP</div>
+                                        </div>
+                                    </div>
+                                    <div class="reward-card">
+                                        <img src="assets/tich-diem-doi-qua/snack_hoc_ba.png" alt="Snack">
+                                        <div class="reward-body">
+                                            <div class="reward-name">Combo Snack Học Bá</div>
+                                            <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 450 XP</div>
+                                        </div>
+                                    </div>
+                                    <div class="reward-card">
+                                        <img src="assets/tich-diem-doi-qua/ao_upgrid.png" alt="Áo">
+                                        <div class="reward-body">
+                                            <div class="reward-name">Áo Limited UpGrid</div>
+                                            <div class="reward-xp"><i data-lucide="star" class="w-3.5 h-3.5"></i> 1200 XP</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            rank: `
+                <div class="p-8 lg:p-12 fade-in-up">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b border-slate-100 pb-6">
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-950 flex items-center gap-3">
+                                <i data-lucide="trophy" class="w-7 h-7 text-orange-500"></i>
+                                Bảng Vàng Thành Tích & Hệ Thống Badge
+                            </h4>
+                            <p class="text-slate-600 mt-2 max-w-2xl">UpGrid không chỉ tôn vinh điểm số cao nhất, mà quan trọng hơn là vinh danh sự cố gắng vượt bậc, tính sáng tạo và tinh thần hỗ trợ đồng đội.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                            <div class="achievement-inner">
+                                <div class="achievement-front">
+                                    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80" alt="Chiến thần kỷ luật">
+                                    <div class="achievement-label">
+                                        <h4>Chiến Thần Kỷ Luật</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-back">
+                                    <h4>The Discipline Master</h4>
+                                    <i data-lucide="shield-check" class="w-12 h-12 mb-4 opacity-80"></i>
+                                    <p>Dành cho học sinh giữ chuỗi hoàn thành bài tập đầy đủ và đúng hạn dài nhất. Xây dựng tính bền bỉ.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                            <div class="achievement-inner">
+                                <div class="achievement-front">
+                                    <img src="https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=400&q=80" alt="Nhà phát minh">
+                                    <div class="achievement-label">
+                                        <h4>Nhà Phát Minh</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-back">
+                                    <h4>Creative Thinker</h4>
+                                    <i data-lucide="lightbulb" class="w-12 h-12 mb-4 opacity-80"></i>
+                                    <p>Vinh danh học sinh nghĩ ra cách giải mới, độc đáo hoặc lời giải ngắn gọn bất ngờ.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                            <div class="achievement-inner">
+                                <div class="achievement-front">
+                                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=400&q=80" alt="Mentor nhí">
+                                    <div class="achievement-label">
+                                        <h4>Mentor Nhí</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-back">
+                                    <h4>Mini Mentor</h4>
+                                    <i data-lucide="heart" class="w-12 h-12 mb-4 opacity-80"></i>
+                                    <p>Dành cho bạn thường xuyên nỗ lực giảng lại bài cho bạn cùng bàn hoặc hỗ trợ nhóm hoàn thành thử thách.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                            <div class="achievement-inner">
+                                <div class="achievement-front">
+                                    <img src="https://images.unsplash.com/photo-1557682260-96773eb0237a?auto=format&fit=crop&w=400&q=80" alt="Growth Master">
+                                    <div class="achievement-label">
+                                        <h4>Growth Master</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Click xem ý nghĩa</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-back">
+                                    <h4>Bứt Phá Ngoạn Mục</h4>
+                                    <i data-lucide="trending-up" class="w-12 h-12 mb-4 opacity-80"></i>
+                                    <p>Vinh danh học sinh có sự tiến bộ vượt bậc so với chính mình ở đầu kỳ học, không kể điểm số tuyệt đối.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
         };
 
         function switchEduTab(tabId) {
