@@ -678,269 +678,340 @@
 
     <!-- Gamification -->
    /* ===== EXPERIENCE SECTION ===== */
+<!-- EXPERIENCE SECTION -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-.experience-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 2rem;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-}
+        <!-- TITLE -->
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-5">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                Học mà chơi - tiến bộ thật
+            </div>
 
-.experience-header {
-    padding: 2rem 2rem 1rem;
-}
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-5">
+                Một Buổi Học Tại UpGrid
+            </h2>
 
-.experience-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
+            <p class="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                Chúng tôi biến lớp học thành nơi học sinh muốn bước vào mỗi ngày —
+                có động lực cố gắng, được ghi nhận tiến bộ và luôn cảm thấy “mình làm được”.
+            </p>
+        </div>
 
-.experience-sub {
-    color: #64748b;
-    margin-top: 0.8rem;
-    line-height: 1.7;
-}
+        <div class="space-y-10">
 
-/* GAME CARD */
+            <!-- WARMUP -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <i data-lucide="zap" class="w-8 h-8 text-yellow-500"></i>
+                        Warm-up Phản Xạ
+                    </div>
 
-.game-card {
-    perspective: 2000px;
-    height: 260px;
-    cursor: pointer;
-}
+                    <p class="experience-sub">
+                        Mini game đầu giờ giúp học sinh ôn lại kiến thức cũ một cách tự nhiên,
+                        giảm áp lực hỏi bài và giúp não bộ “khởi động” trước khi học kiến thức mới.
+                    </p>
+                </div>
 
-.game-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.9s;
-    transform-style: preserve-3d;
-}
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
 
-.game-card.flipped .game-card-inner {
-    transform: rotateY(180deg);
-}
+                    <!-- GAME -->
+                    <div class="game-card" onclick="this.classList.toggle('flipped')">
+                        <div class="game-card-inner">
 
-.game-front,
-.game-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
+                            <div class="game-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="game-overlay"></div>
 
-.game-front {
-    background: white;
-    border: 1px solid #e2e8f0;
-}
+                                <div class="game-title">
+                                    <h4>Truy Kích Công Thức</h4>
+                                    <p>Click để xem luật chơi</p>
+                                </div>
+                            </div>
 
-.game-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+                            <div class="game-back">
+                                <h4>Truy Kích Công Thức</h4>
+                                <p>
+                                    Mentor đọc dữ kiện thật nhanh, học sinh phải giơ bảng công thức đúng.
+                                    Ai phản xạ nhanh và chính xác sẽ ghi điểm cho đội.
+                                </p>
+                            </div>
 
-.game-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15,23,42,0.85), transparent 55%);
-}
+                        </div>
+                    </div>
 
-.game-title {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-    color: white;
-}
+                    <!-- GAME -->
+                    <div class="game-card" onclick="this.classList.toggle('flipped')">
+                        <div class="game-card-inner">
 
-.game-title h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-}
+                            <div class="game-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="game-overlay"></div>
 
-.game-title p {
-    font-size: 0.8rem;
-    opacity: 0.9;
-    margin-top: 0.2rem;
-}
+                                <div class="game-title">
+                                    <h4>Giải Mã Sai Lầm</h4>
+                                    <p>Click để xem luật chơi</p>
+                                </div>
+                            </div>
 
-.game-back {
-    transform: rotateY(180deg);
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+                            <div class="game-back">
+                                <h4>Giải Mã Sai Lầm</h4>
+                                <p>
+                                    Mentor đưa ra một lời giải sai. Nhiệm vụ của học sinh là tìm
+                                    lỗi sai nhanh nhất và sửa lại chính xác.
+                                </p>
+                            </div>
 
-.game-back h4 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
+                        </div>
+                    </div>
 
-.game-back p {
-    line-height: 1.7;
-    color: rgba(255,255,255,0.92);
-    font-size: 0.95rem;
-}
+                    <!-- GAME -->
+                    <div class="game-card" onclick="this.classList.toggle('flipped')">
+                        <div class="game-card-inner">
 
-/* REWARD SHOP */
+                            <div class="game-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="game-overlay"></div>
 
-.reward-scroll {
-    overflow-x: auto;
-    padding-bottom: 1rem;
-}
+                                <div class="game-title">
+                                    <h4>Đua Não 30s</h4>
+                                    <p>Click để xem luật chơi</p>
+                                </div>
+                            </div>
 
-.reward-scroll::-webkit-scrollbar {
-    height: 8px;
-}
+                            <div class="game-back">
+                                <h4>Đua Não 30s</h4>
+                                <p>
+                                    Trong 30 giây, học sinh giải liên tiếp các câu hỏi phản xạ nhanh.
+                                    Càng đúng nhiều càng nhận combo XP lớn.
+                                </p>
+                            </div>
 
-.reward-scroll::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 999px;
-}
+                        </div>
+                    </div>
 
-.reward-row {
-    display: flex;
-    gap: 1rem;
-    width: max-content;
-}
+                    <!-- GAME -->
+                    <div class="game-card" onclick="this.classList.toggle('flipped')">
+                        <div class="game-card-inner">
 
-.reward-card {
-    width: 190px;
-    flex-shrink: 0;
-    background: white;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-    transition: 0.3s;
-}
+                            <div class="game-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="game-overlay"></div>
 
-.reward-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(37,99,235,0.15);
-}
+                                <div class="game-title">
+                                    <h4>Săn Boss Toán Học</h4>
+                                    <p>Click để xem luật chơi</p>
+                                </div>
+                            </div>
 
-.reward-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
+                            <div class="game-back">
+                                <h4>Săn Boss Toán Học</h4>
+                                <p>
+                                    Cả lớp cùng teamwork giải một bài toán “boss”.
+                                    Mỗi bước giải đúng sẽ mở khóa thêm gợi ý tiếp theo.
+                                </p>
+                            </div>
 
-.reward-body {
-    padding: 1rem;
-}
+                        </div>
+                    </div>
 
-.reward-name {
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
-}
+                </div>
+            </div>
 
-.reward-xp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: #eff6ff;
-    color: #2563eb;
-    padding: 0.35rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-}
+            <!-- REWARD SHOP -->
+            <div class="experience-card">
 
-/* ACHIEVEMENT CARD */
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <i data-lucide="gift" class="w-8 h-8 text-pink-500"></i>
+                        Tích Điểm Nhận Quà
+                    </div>
 
-.achievement-card {
-    perspective: 2000px;
-    height: 320px;
-    cursor: pointer;
-}
+                    <p class="experience-sub">
+                        Mỗi lần phát biểu, giải đúng, hỗ trợ bạn bè hay hoàn thành thử thách
+                        đều được cộng XP ngay tại lớp.
+                    </p>
+                </div>
 
-.achievement-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.9s;
-    transform-style: preserve-3d;
-}
+                <div class="px-6 pb-8">
+                    <div class="reward-scroll">
+                        <div class="reward-row">
 
-.achievement-card.flipped .achievement-inner {
-    transform: rotateY(180deg);
-}
+                            <div class="reward-card">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="reward-body">
+                                    <div class="reward-name">Blind Box Toán Học</div>
+                                    <div class="reward-xp">
+                                        <i data-lucide="star" class="w-4 h-4"></i>
+                                        150 XP
+                                    </div>
+                                </div>
+                            </div>
 
-.achievement-front,
-.achievement-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 1.8rem;
-    overflow: hidden;
-    backface-visibility: hidden;
-}
+                            <div class="reward-card">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="reward-body">
+                                    <div class="reward-name">Thẻ Miễn Bài Tập</div>
+                                    <div class="reward-xp">
+                                        <i data-lucide="star" class="w-4 h-4"></i>
+                                        220 XP
+                                    </div>
+                                </div>
+                            </div>
 
-.achievement-front {
-    background: white;
-    border: 1px solid #e2e8f0;
-}
+                            <div class="reward-card">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="reward-body">
+                                    <div class="reward-name">Bút Chiến Thần</div>
+                                    <div class="reward-xp">
+                                        <i data-lucide="star" class="w-4 h-4"></i>
+                                        300 XP
+                                    </div>
+                                </div>
+                            </div>
 
-.achievement-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+                            <div class="reward-card">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="reward-body">
+                                    <div class="reward-name">Combo Snack Học Bá</div>
+                                    <div class="reward-xp">
+                                        <i data-lucide="star" class="w-4 h-4"></i>
+                                        450 XP
+                                    </div>
+                                </div>
+                            </div>
 
-.achievement-front::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15,23,42,0.92), transparent 60%);
-}
+                            <div class="reward-card">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="reward-body">
+                                    <div class="reward-name">Áo Limited UpGrid</div>
+                                    <div class="reward-xp">
+                                        <i data-lucide="star" class="w-4 h-4"></i>
+                                        1200 XP
+                                    </div>
+                                </div>
+                            </div>
 
-.achievement-label {
-    position: absolute;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    right: 1.2rem;
-    color: white;
-    z-index: 2;
-}
+                        </div>
+                    </div>
+                </div>
 
-.achievement-label h4 {
-    font-size: 1.15rem;
-    font-weight: 800;
-}
+            </div>
 
-.achievement-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    padding: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+            <!-- ACHIEVEMENT -->
+            <div class="experience-card">
 
-.achievement-back h4 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <i data-lucide="trophy" class="w-8 h-8 text-orange-500"></i>
+                        Bảng Vàng Thành Tích
+                    </div>
 
-.achievement-back p {
-    line-height: 1.7;
-    color: rgba(255,255,255,0.88);
-}
+                    <p class="experience-sub">
+                        Không chỉ tôn vinh điểm số — UpGrid ghi nhận cả sự cố gắng,
+                        tính sáng tạo và tinh thần hỗ trợ bạn bè.
+                    </p>
+                </div>
 
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+                    <!-- ACHIEVEMENT -->
+                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                        <div class="achievement-inner">
+
+                            <div class="achievement-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="achievement-label">
+                                    <h4>Chiến Thần Kỷ Luật</h4>
+                                </div>
+                            </div>
+
+                            <div class="achievement-back">
+                                <h4>Chiến Thần Kỷ Luật</h4>
+                                <p>
+                                    Dành cho học sinh giữ chuỗi hoàn thành bài tập dài nhất.
+                                    Giúp các con xây tính kỷ luật và sự bền bỉ trong học tập.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ACHIEVEMENT -->
+                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                        <div class="achievement-inner">
+
+                            <div class="achievement-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="achievement-label">
+                                    <h4>Nhà Phát Minh Công Thức</h4>
+                                </div>
+                            </div>
+
+                            <div class="achievement-back">
+                                <h4>Nhà Phát Minh Công Thức</h4>
+                                <p>
+                                    Dành cho học sinh nghĩ ra cách giải mới hoặc lời giải sáng tạo.
+                                    Khuyến khích tư duy độc lập thay vì học thuộc máy móc.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ACHIEVEMENT -->
+                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                        <div class="achievement-inner">
+
+                            <div class="achievement-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="achievement-label">
+                                    <h4>Mentor Nhí</h4>
+                                </div>
+                            </div>
+
+                            <div class="achievement-back">
+                                <h4>Mentor Nhí</h4>
+                                <p>
+                                    Dành cho học sinh thường xuyên hỗ trợ giảng bài cho bạn bè.
+                                    Rèn kỹ năng giao tiếp và khả năng giải thích logic.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ACHIEVEMENT -->
+                    <div class="achievement-card" onclick="this.classList.toggle('flipped')">
+                        <div class="achievement-inner">
+
+                            <div class="achievement-front">
+                                <img src="YOUR_IMAGE_HERE" alt="">
+                                <div class="achievement-label">
+                                    <h4>Vua Phản Xạ</h4>
+                                </div>
+                            </div>
+
+                            <div class="achievement-back">
+                                <h4>Vua Phản Xạ</h4>
+                                <p>
+                                    Dành cho học sinh có tốc độ xử lý nhanh nhất trong các mini game.
+                                    Giúp tăng sự tự tin và khả năng tư duy tốc độ cao.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
     <!-- Registration -->
     <section id="uu-dai" class="py-20 bg-slate-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1458,5 +1529,6 @@ function switchExperienceTab(tab) {
 
 switchExperienceTab('warmup');
     </script>
+  
 </body>
 </html>
