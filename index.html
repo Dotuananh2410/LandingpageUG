@@ -207,6 +207,269 @@
             width: 6px; height: 6px; border-radius: 50%;
             flex-shrink: 0; margin-top: 0.45rem;
         }
+        /* ===== EXPERIENCE SECTION ===== */
+
+.experience-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.experience-header {
+    padding: 2rem 2rem 1rem;
+}
+
+.experience-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.experience-sub {
+    color: #64748b;
+    margin-top: 0.8rem;
+    line-height: 1.7;
+}
+
+/* GAME CARD */
+
+.game-card {
+    perspective: 2000px;
+    height: 260px;
+    cursor: pointer;
+}
+
+.game-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
+
+.game-card.flipped .game-card-inner {
+    transform: rotateY(180deg);
+}
+
+.game-front,
+.game-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.game-front {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.game-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.85), transparent 55%);
+}
+
+.game-title {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    color: white;
+}
+
+.game-title h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.game-title p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin-top: 0.2rem;
+}
+
+.game-back {
+    transform: rotateY(180deg);
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.game-back h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.game-back p {
+    line-height: 1.7;
+    color: rgba(255,255,255,0.92);
+    font-size: 0.95rem;
+}
+
+/* REWARD SHOP */
+
+.reward-scroll {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.reward-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.reward-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+.reward-row {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+}
+
+.reward-card {
+    width: 190px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.reward-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37,99,235,0.15);
+}
+
+.reward-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.reward-body {
+    padding: 1rem;
+}
+
+.reward-name {
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+.reward-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+/* ACHIEVEMENT CARD */
+
+.achievement-card {
+    perspective: 2000px;
+    height: 320px;
+    cursor: pointer;
+}
+
+.achievement-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
+
+.achievement-card.flipped .achievement-inner {
+    transform: rotateY(180deg);
+}
+
+.achievement-front,
+.achievement-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.8rem;
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+.achievement-front {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.achievement-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.achievement-front::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.92), transparent 60%);
+}
+
+.achievement-label {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    right: 1.2rem;
+    color: white;
+    z-index: 2;
+}
+
+.achievement-label h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.achievement-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.achievement-back h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.achievement-back p {
+    line-height: 1.7;
+    color: rgba(255,255,255,0.88);
+}
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -414,127 +677,269 @@
     </section>
 
     <!-- Gamification -->
-    <!-- ===== EXPERIENCE SYSTEM SECTION ===== -->
-<section class="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 relative overflow-hidden">
+   /* ===== EXPERIENCE SECTION ===== */
 
-    <!-- Background Effects -->
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-200/30 blur-3xl rounded-full"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-200/30 blur-3xl rounded-full"></div>
+.experience-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
 
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+.experience-header {
+    padding: 2rem 2rem 1rem;
+}
 
-        <!-- Header -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-6">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                TRẢI NGHIỆM HỌC TẬP KIỂU MỚI
-            </div>
+.experience-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
 
-            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-                Mỗi Buổi Học Là Một <br>
-                <span class="gradient-text">Hành Trình Chinh Phục</span>
-            </h2>
+.experience-sub {
+    color: #64748b;
+    margin-top: 0.8rem;
+    line-height: 1.7;
+}
 
-            <p class="text-lg text-slate-600 leading-relaxed">
-                UpGrid game hóa lớp học một cách vừa đủ để học sinh luôn có động lực học tập,
-                chủ động tiến bộ và cảm thấy việc học thú vị hơn mỗi ngày.
-            </p>
-        </div>
+/* GAME CARD */
 
-        <!-- Top Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+.game-card {
+    perspective: 2000px;
+    height: 260px;
+    cursor: pointer;
+}
 
-            <!-- CARD 1 -->
-            <button onclick="switchExperienceTab('warmup')"
-                id="tab-btn-warmup"
-                class="experience-tab-btn bg-white border-2 border-blue-500 shadow-xl rounded-[2rem] p-7 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+.game-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
 
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-5">
-                    <i data-lucide="zap" class="w-7 h-7"></i>
-                </div>
+.game-card.flipped .game-card-inner {
+    transform: rotateY(180deg);
+}
 
-                <h3 class="text-2xl font-bold text-slate-900 mb-3">
-                    Warm-up Phản Xạ
-                </h3>
+.game-front,
+.game-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
 
-                <p class="text-slate-600 mb-5 leading-relaxed">
-                    Mini game đầu giờ giúp học sinh ôn kiến thức tự nhiên,
-                    không áp lực hỏi bài.
-                </p>
+.game-front {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
 
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">Quiz tốc độ</span>
-                    <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">Team battle</span>
-                    <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">Kho báu toán học</span>
-                </div>
-            </button>
+.game-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-            <!-- CARD 2 -->
-            <button onclick="switchExperienceTab('reward')"
-                id="tab-btn-reward"
-                class="experience-tab-btn bg-white border border-slate-200 rounded-[2rem] p-7 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+.game-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.85), transparent 55%);
+}
 
-                <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mb-5">
-                    <i data-lucide="gift" class="w-7 h-7"></i>
-                </div>
+.game-title {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    color: white;
+}
 
-                <h3 class="text-2xl font-bold text-slate-900 mb-3">
-                    Tích Điểm Nhận Quà
-                </h3>
+.game-title h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
 
-                <p class="text-slate-600 mb-5 leading-relaxed">
-                    Mỗi nỗ lực đều được ghi nhận bằng XP và phần thưởng hấp dẫn.
-                </p>
+.game-title p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin-top: 0.2rem;
+}
 
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold">XP System</span>
-                    <span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold">Mystery Box</span>
-                    <span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold">Reward Shop</span>
-                </div>
-            </button>
+.game-back {
+    transform: rotateY(180deg);
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-            <!-- CARD 3 -->
-            <button onclick="switchExperienceTab('achievement')"
-                id="tab-btn-achievement"
-                class="experience-tab-btn bg-white border border-slate-200 rounded-[2rem] p-7 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+.game-back h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
 
-                <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mb-5">
-                    <i data-lucide="trophy" class="w-7 h-7"></i>
-                </div>
+.game-back p {
+    line-height: 1.7;
+    color: rgba(255,255,255,0.92);
+    font-size: 0.95rem;
+}
 
-                <h3 class="text-2xl font-bold text-slate-900 mb-3">
-                    Bảng Vàng Thành Tích
-                </h3>
+/* REWARD SHOP */
 
-                <p class="text-slate-600 mb-5 leading-relaxed">
-                    Không chỉ điểm số, mọi sự tiến bộ đều được ghi nhận mỗi ngày.
-                </p>
+.reward-scroll {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
 
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold">Streak</span>
-                    <span class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold">Badges</span>
-                    <span class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold">Leaderboard</span>
-                </div>
-            </button>
-        </div>
+.reward-scroll::-webkit-scrollbar {
+    height: 8px;
+}
 
-        <!-- DYNAMIC CONTENT -->
-        <div id="experience-content"
-            class="bg-white rounded-[2.5rem] border border-slate-200 shadow-xl overflow-hidden transition-all duration-500">
+.reward-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
 
-            <!-- CONTENT INJECTED BY JS -->
-        </div>
+.reward-row {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+}
 
-        <!-- CTA -->
-        <div class="text-center mt-14">
-            <a href="#dang-ky"
-                class="btn-primary inline-flex items-center gap-2 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg">
-                Trải nghiệm buổi học thử miễn phí
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-            </a>
-        </div>
-    </div>
-</section>
+.reward-card {
+    width: 190px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.reward-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37,99,235,0.15);
+}
+
+.reward-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.reward-body {
+    padding: 1rem;
+}
+
+.reward-name {
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+.reward-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+/* ACHIEVEMENT CARD */
+
+.achievement-card {
+    perspective: 2000px;
+    height: 320px;
+    cursor: pointer;
+}
+
+.achievement-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
+
+.achievement-card.flipped .achievement-inner {
+    transform: rotateY(180deg);
+}
+
+.achievement-front,
+.achievement-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.8rem;
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+.achievement-front {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.achievement-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.achievement-front::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.92), transparent 60%);
+}
+
+.achievement-label {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    right: 1.2rem;
+    color: white;
+    z-index: 2;
+}
+
+.achievement-label h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.achievement-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.achievement-back h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.achievement-back p {
+    line-height: 1.7;
+    color: rgba(255,255,255,0.88);
+}
 
     <!-- Registration -->
     <section id="uu-dai" class="py-20 bg-slate-100">
