@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- THÊM NGAY ĐÂY -->
+<script>
+  const _supabase = window.supabase.createClient(
+    "https://jpkihfxuzvmqcsidacho.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impwa2loZnh1enZtcWNzaWRhY2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTI4MDYsImV4cCI6MjA5NDU2ODgwNn0.-yBL6TuOyrmlfr1thBXnHjj52xdQ5uSY1QhrcCrk07E"
+  );
+</script>
     <!-- Supabase Integration -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -1772,11 +1781,6 @@ function switchExperienceTab(tab) {
 }
 
 switchExperienceTab('warmup');
-
-// Initialize Supabase Client
-const SUPABASE_URL = "https://jpkihfxuzvmqcsidacho.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impwa2loZnh1enZtcWNzaWRhY2hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTI4MDYsImV4cCI6MjA5NDU2ODgwNn0.-yBL6TuOyrmlfr1thBXnHjj52xdQ5uSY1QhrcCrk07E";
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Handle Registration Form Submission
 document.getElementById('registration-form').addEventListener('submit', async function(e) {
